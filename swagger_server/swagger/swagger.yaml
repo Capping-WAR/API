@@ -1,0 +1,720 @@
+---
+swagger: "2.0"
+info:
+  description: "A REST API to enable all interactions of the Marist Writing Advisor\
+    \ Reviewer tool."
+  version: "0.0.1"
+  title: "WAR API"
+  contact:
+    email: "Daniel.Gisolfi1@marist.edu"
+host: "10.10.9.156"
+basePath: "/v1"
+schemes:
+- "https"
+- "http"
+paths:
+  /reviewers:
+    get:
+      tags:
+      - "Reviewer"
+      summary: "Get all Reviewers"
+      operationId: "get_reviewers"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Reviewers successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/reviewer"
+        400:
+          description: "Reviewers retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.reviewer_controller"
+  /reviewer:
+    post:
+      tags:
+      - "Reviewer"
+      summary: "Add a Reviewer"
+      operationId: "add_reviewer"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "survey"
+        description: "Reviewer to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/reviewer"
+      responses:
+        201:
+          description: "Reviewer successfully added"
+        400:
+          description: "Reviewer add error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.reviewer_controller"
+  /reviewer/{reviewerID}:
+    get:
+      tags:
+      - "Reviewer"
+      summary: "Get a Reviewer by ID"
+      operationId: "get_reviewer_by_id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "reviewerID"
+        in: "path"
+        description: "ID of Reviewer"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Reviewer successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/reviewer"
+        400:
+          description: "Reviewer retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Reviewer does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.reviewer_controller"
+    put:
+      tags:
+      - "Reviewer"
+      summary: "Update a Reviewer"
+      operationId: "update_reviewer"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "reviewerID"
+        in: "path"
+        description: "ID of Reviewer"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "survey"
+        description: "New Version of the Reviewer"
+        required: true
+        schema:
+          $ref: "#/definitions/reviewer"
+      responses:
+        200:
+          description: "Reviewer successfully updated"
+        400:
+          description: "Reviewer update error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Reviewer does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.reviewer_controller"
+    delete:
+      tags:
+      - "Reviewer"
+      summary: "Delete a Reviewer"
+      operationId: "delete_reviewer"
+      parameters:
+      - name: "reviewerID"
+        in: "path"
+        description: "ID of Reviewer"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Reviewer successfully deleted"
+        400:
+          description: "Reviewer delete error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Reviewer does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.reviewer_controller"
+  /reviews:
+    get:
+      tags:
+      - "Review"
+      summary: "Get all Reviews"
+      operationId: "get_reviews"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Reviews successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/review"
+        400:
+          description: "Reviews retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.review_controller"
+  /review:
+    post:
+      tags:
+      - "Review"
+      summary: "Add a Review"
+      operationId: "add_review"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "survey"
+        description: "Review to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/review"
+      responses:
+        201:
+          description: "Review successfully added"
+        400:
+          description: "Review add error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.review_controller"
+  /review/{reviewID}:
+    get:
+      tags:
+      - "Review"
+      summary: "Get a Review by ID"
+      operationId: "get_review_by_id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "reviewID"
+        in: "path"
+        description: "ID of Review"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Review successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/review"
+        400:
+          description: "Review retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Review does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.review_controller"
+    put:
+      tags:
+      - "Review"
+      summary: "Update a Review"
+      operationId: "update_review"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "reviewID"
+        in: "path"
+        description: "ID of Review"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "survey"
+        description: "New Version of the Review"
+        required: true
+        schema:
+          $ref: "#/definitions/review"
+      responses:
+        200:
+          description: "Review successfully updated"
+        400:
+          description: "Review update error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Review does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.review_controller"
+    delete:
+      tags:
+      - "Review"
+      summary: "Delete a Review"
+      operationId: "delete_review"
+      parameters:
+      - name: "reviewID"
+        in: "path"
+        description: "ID of Review"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Review successfully deleted"
+        400:
+          description: "Review delete error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Review does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.review_controller"
+  /sentences:
+    get:
+      tags:
+      - "Sentence"
+      summary: "Get all Sentences"
+      operationId: "get_sentences"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Sentences successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/sentence"
+        400:
+          description: "Sentences retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.sentence_controller"
+  /sentence:
+    post:
+      tags:
+      - "Sentence"
+      summary: "Add a Sentence"
+      operationId: "add_sentence"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "survey"
+        description: "Sentence to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/sentence"
+      responses:
+        201:
+          description: "Sentence successfully added"
+        400:
+          description: "Sentence add error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.sentence_controller"
+  /sentence/{sentenceID}:
+    get:
+      tags:
+      - "Sentence"
+      summary: "Get a Sentence by ID"
+      operationId: "get_sentence_by_id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sentenceID"
+        in: "path"
+        description: "ID of Sentence"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Sentence successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/sentence"
+        400:
+          description: "Sentence retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Sentence does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.sentence_controller"
+    put:
+      tags:
+      - "Sentence"
+      summary: "Update a Sentence"
+      operationId: "update_sentence"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sentenceID"
+        in: "path"
+        description: "ID of Sentence"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "survey"
+        description: "New Version of the Sentence"
+        required: true
+        schema:
+          $ref: "#/definitions/sentence"
+      responses:
+        200:
+          description: "Sentence successfully updated"
+        400:
+          description: "Sentence update error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Sentence does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.sentence_controller"
+    delete:
+      tags:
+      - "Sentence"
+      summary: "Delete a Sentence"
+      operationId: "delete_sentence"
+      parameters:
+      - name: "sentenceID"
+        in: "path"
+        description: "ID of Sentence"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Sentence successfully deleted"
+        400:
+          description: "Sentence delete error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Sentence does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.sentence_controller"
+  /Data:
+    get:
+      tags:
+      - "Data"
+      summary: "Get all Datapoints"
+      operationId: "get_datapoints"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Data successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/datapoint"
+        400:
+          description: "Data retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.data_controller"
+    post:
+      tags:
+      - "Data"
+      summary: "Add a Datapoint"
+      operationId: "add_datapoint"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Datapoint"
+        description: "Datapoint to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/datapoint"
+      responses:
+        201:
+          description: "Datapoint successfully added"
+        400:
+          description: "Datapoint add error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.data_controller"
+  /data/{sentenceID}:
+    get:
+      tags:
+      - "Data"
+      summary: "Get a datapoint by sentence ID"
+      operationId: "get_datapoint_by_id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sentenceID"
+        in: "path"
+        description: "ID of Sentence"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Datapoint successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/datapoint"
+        400:
+          description: "Datapoint retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Datapoint does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.data_controller"
+    put:
+      tags:
+      - "Data"
+      summary: "Update a Datapoint"
+      operationId: "update_datapoint"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sentenceID"
+        in: "path"
+        description: "ID of Sentence"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "Datapoint"
+        description: "New Version of the Datapoint"
+        required: true
+        schema:
+          $ref: "#/definitions/datapoint"
+      responses:
+        200:
+          description: "Datapoint successfully updated"
+        400:
+          description: "Datapoint update error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Datapoint does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.data_controller"
+    delete:
+      tags:
+      - "Data"
+      summary: "Delete a Datapoint"
+      operationId: "delete_datapoint"
+      parameters:
+      - name: "sentenceID"
+        in: "path"
+        description: "ID of Sentence"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Datapoint successfully deleted"
+        400:
+          description: "Datapoint delete error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Datapoint does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.data_controller"
+definitions:
+  request_info:
+    properties:
+      status_code:
+        type: "integer"
+        example: 404
+        description: "HTTP Status Code"
+      message:
+        type: "string"
+        example: "Invalid format"
+        description: "Info about what went wrong"
+    description: "Information about the results of the request to the server"
+  reviewer:
+    required:
+    - "admin"
+    - "emailAddress"
+    - "firstName"
+    - "lastName"
+    - "reputation"
+    properties:
+      reviewerID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the reviewer"
+      emailAddress:
+        type: "string"
+        example: "user@marist.edu"
+        description: ":\"Email address of the reviewer\""
+      firstName:
+        type: "string"
+        example: "Alan"
+        description: "The first name of the user"
+      lastName:
+        type: "string"
+        example: "labouseur"
+        description: "The last name of the user"
+      admin:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this user has admin privileges"
+      reputation:
+        type: "integer"
+        example: 93
+        description: "The user's ranking as a reviewer"
+    example:
+      firstName: "Alan"
+      lastName: "labouseur"
+      emailAddress: "user@marist.edu"
+      reviewerID: 1
+      admin: false
+      reputation: 93
+  review:
+    required:
+    - "correct"
+    - "rule1"
+    - "rule2"
+    - "rule3"
+    - "rule4"
+    - "rule5"
+    - "sentenceID"
+    - "userID"
+    properties:
+      reviewerID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the review"
+      userID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the user who submitted the sentence"
+      sentenceID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the sentence that was submitted for review"
+      correct:
+        type: "boolean"
+        example: false
+        description: "Denotes wether the sentence is marked correct or not"
+      rule1:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+      rule2:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+      rule3:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+      rule4:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+      rule5:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+    example:
+      reviewerID: 1
+      correct: false
+      rule5: false
+      rule4: false
+      rule1: false
+      sentenceID: 1
+      rule3: false
+      rule2: false
+      userID: 1
+  sentence:
+    required:
+    - "rule1"
+    - "rule2"
+    - "rule3"
+    - "rule4"
+    - "rule5"
+    - "sentence"
+    - "userID"
+    properties:
+      sentenceID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the sentence that was submitted for review"
+      userID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the user who submitted the sentence"
+      sentence:
+        type: "string"
+        example: "This is a sentence."
+        description: "The user submitted sentence to be reviewed"
+      rule1:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+      rule2:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+      rule3:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+      rule4:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+      rule5:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+    example:
+      sentence: "This is a sentence."
+      rule5: false
+      rule4: false
+      rule1: false
+      sentenceID: 1
+      rule3: false
+      rule2: false
+      userID: 1
+  datapoint:
+    required:
+    - "correct"
+    - "rule1"
+    - "rule2"
+    - "rule3"
+    - "rule4"
+    - "rule5"
+    - "sentence"
+    properties:
+      sentenceID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the sentence that was submitted for review"
+      sentence:
+        type: "string"
+        example: "This is a sentence."
+        description: "The user submitted sentence to be reviewed"
+      correct:
+        type: "boolean"
+        example: false
+        description: "Denotes wether the sentence is marked correct or not"
+      rule1:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+      rule2:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+      rule3:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+      rule4:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+      rule5:
+        type: "boolean"
+        example: false
+        description: "Denotes wether this rule was broken by the sentence"
+    example:
+      sentence: "This is a sentence."
+      correct: false
+      rule5: false
+      rule4: false
+      rule1: false
+      sentenceID: 1
+      rule3: false
+      rule2: false
