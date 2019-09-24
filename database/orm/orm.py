@@ -104,8 +104,26 @@ class ORM:
     """ Base Operations """
 
     def get(self, table:str, cols:str=None, 
-        ver_id=None, clause:str=None) -> list or Exception:
-        """
+        clause:str=None) -> list or Exception:
+        """Returns all rows from the specified table meeting the 
+        nessecary conditions
+
+        Parameters 
+        ----------
+        table : str
+            a valid table name from the database for
+            the data to be inserted into.
+        cols : str
+            a string of comma seperated column names that corosponds 
+            to the values, can be left out if all values are present.
+        clause : str
+            A condition to be met by the data, 
+            EX: WHERE ID=3
+
+        Returns
+        -------
+        response
+            will return the response from the database.
         """
 
         sql = 'SELECT'
@@ -122,14 +140,9 @@ class ORM:
 
         sql += f"FROM {table}"
 
-        keyword = 'WHERE'
         if clause is not None:
-            keyword = 'AND'
-            sql += clause
-        if ver_id is not None:
-            sql += f"""
-                '{keyword} {self.tables[table.lower()]} = '{ver_id}'
-            """
+            sql += f' {clause}'
+        
 
         return self._query(f'{sql};')
 
@@ -163,21 +176,68 @@ class ORM:
         sql += f" VALUES ({','.join(values)})"
 
         return self._query(f'{sql};')
+
+    def update(self, table:str, values:dict,
+        clause:str=None) -> list or Exception:
+        """Given a dict of cols and values, all rows that meet the 
+        given clauses will be updated
+
+        Parameters 
+        ----------
+        table : str
+            a valid table name from the database for
+            the data to be inserted into.
+        values : dict
+            Key value pairs of all updates to make. EX:
+            {'col1': 'new_value'}
+        clause : str
+            A condition to be met by the data, 
+            EX: WHERE ID=3
+        
+        Returns
+        -------
+        response
+            will return the response from the database.
+        """
+
+        sql = f'UPDATE {table} SET'
+        last_col = sorted(values.keys())[-1]
+        for col, val in values.items():
+            if col == last_col:
+                sql += f' {col}={val}'
+            else:
+                sql += f' {col}={val},'
+            
+        if clause is not None:
+            sql += f' {clause}'
+
+        return self._query(f'{sql};')
+
     
     def delete(self, table:str, clause:str) -> list or Exception:
-        """
+        """Given a clause all rows to meet it will be deleted 
+        from the table
+
+        Parameters 
+        ----------
+        table : str
+            a valid table name from the database for
+            the data to be inserted into.
+        clause : str
+            A condition to be met by the data, 
+            EX: WHERE ID=3
+        
+        Returns
+        -------
+        response
+            will return the response from the database.
         """
 
         sql = f"""
         DELETE FROM {table}
-        WHERE {clause};
+        {clause};
         """
         return self._query(sql)
-
-
-
-
-
 
     """ Versions """
 
