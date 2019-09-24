@@ -239,12 +239,4 @@ class ORM:
         """
         return self._query(sql)
 
-    """ Versions """
-
-    """ Dataset """
-
-    """ Sentences """
-
-    """ Reviews """
-
-    """ Reviewers """
+    """ Add more here when nessecary """
