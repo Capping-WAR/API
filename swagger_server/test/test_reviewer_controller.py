@@ -33,7 +33,7 @@ class TestReviewerController(BaseTestCase):
         Delete a Reviewer
         """
         response = self.client.open(
-            '/api/v1/reviewer/{reviewerID}'.format(reviewerID='reviewerID_example'),
+            '/api/v1/reviewer/{reviewerID}'.format(reviewerID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -44,7 +44,7 @@ class TestReviewerController(BaseTestCase):
         Get a Reviewer by ID
         """
         response = self.client.open(
-            '/api/v1/reviewer/{reviewerID}'.format(reviewerID='reviewerID_example'),
+            '/api/v1/reviewer/{reviewerID}'.format(reviewerID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -67,7 +67,7 @@ class TestReviewerController(BaseTestCase):
         """
         survey = Reviewer()
         response = self.client.open(
-            '/api/v1/reviewer/{reviewerID}'.format(reviewerID='reviewerID_example'),
+            '/api/v1/reviewer/{reviewerID}'.format(reviewerID=56),
             method='PUT',
             data=json.dumps(survey),
             content_type='application/json')

@@ -15,15 +15,13 @@ class Datapoint(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, sentence_id: int=None, sentence: str=None, correct: bool=None, rule1: bool=None, rule2: bool=None, rule3: bool=None, rule4: bool=None, rule5: bool=None):  # noqa: E501
+    def __init__(self, sentence_id: int=None, sentence: str=None, rule1: bool=None, rule2: bool=None, rule3: bool=None, rule4: bool=None, rule5: bool=None, date_added: str=None):  # noqa: E501
         """Datapoint - a model defined in Swagger
 
         :param sentence_id: The sentence_id of this Datapoint.  # noqa: E501
         :type sentence_id: int
         :param sentence: The sentence of this Datapoint.  # noqa: E501
         :type sentence: str
-        :param correct: The correct of this Datapoint.  # noqa: E501
-        :type correct: bool
         :param rule1: The rule1 of this Datapoint.  # noqa: E501
         :type rule1: bool
         :param rule2: The rule2 of this Datapoint.  # noqa: E501
@@ -34,37 +32,39 @@ class Datapoint(Model):
         :type rule4: bool
         :param rule5: The rule5 of this Datapoint.  # noqa: E501
         :type rule5: bool
+        :param date_added: The date_added of this Datapoint.  # noqa: E501
+        :type date_added: str
         """
         self.swagger_types = {
             'sentence_id': int,
             'sentence': str,
-            'correct': bool,
             'rule1': bool,
             'rule2': bool,
             'rule3': bool,
             'rule4': bool,
-            'rule5': bool
+            'rule5': bool,
+            'date_added': str
         }
 
         self.attribute_map = {
             'sentence_id': 'sentenceID',
             'sentence': 'sentence',
-            'correct': 'correct',
             'rule1': 'rule1',
             'rule2': 'rule2',
             'rule3': 'rule3',
             'rule4': 'rule4',
-            'rule5': 'rule5'
+            'rule5': 'rule5',
+            'date_added': 'dateAdded'
         }
 
         self._sentence_id = sentence_id
         self._sentence = sentence
-        self._correct = correct
         self._rule1 = rule1
         self._rule2 = rule2
         self._rule3 = rule3
         self._rule4 = rule4
         self._rule5 = rule5
+        self._date_added = date_added
 
     @classmethod
     def from_dict(cls, dikt) -> 'Datapoint':
@@ -124,31 +124,6 @@ class Datapoint(Model):
             raise ValueError("Invalid value for `sentence`, must not be `None`")  # noqa: E501
 
         self._sentence = sentence
-
-    @property
-    def correct(self) -> bool:
-        """Gets the correct of this Datapoint.
-
-        Denotes wether the sentence is marked correct or not  # noqa: E501
-
-        :return: The correct of this Datapoint.
-        :rtype: bool
-        """
-        return self._correct
-
-    @correct.setter
-    def correct(self, correct: bool):
-        """Sets the correct of this Datapoint.
-
-        Denotes wether the sentence is marked correct or not  # noqa: E501
-
-        :param correct: The correct of this Datapoint.
-        :type correct: bool
-        """
-        if correct is None:
-            raise ValueError("Invalid value for `correct`, must not be `None`")  # noqa: E501
-
-        self._correct = correct
 
     @property
     def rule1(self) -> bool:
@@ -274,3 +249,28 @@ class Datapoint(Model):
             raise ValueError("Invalid value for `rule5`, must not be `None`")  # noqa: E501
 
         self._rule5 = rule5
+
+    @property
+    def date_added(self) -> str:
+        """Gets the date_added of this Datapoint.
+
+        Date added to the database  # noqa: E501
+
+        :return: The date_added of this Datapoint.
+        :rtype: str
+        """
+        return self._date_added
+
+    @date_added.setter
+    def date_added(self, date_added: str):
+        """Sets the date_added of this Datapoint.
+
+        Date added to the database  # noqa: E501
+
+        :param date_added: The date_added of this Datapoint.
+        :type date_added: str
+        """
+        if date_added is None:
+            raise ValueError("Invalid value for `date_added`, must not be `None`")  # noqa: E501
+
+        self._date_added = date_added

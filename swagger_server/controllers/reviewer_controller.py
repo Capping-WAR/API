@@ -27,7 +27,7 @@ def delete_reviewer(reviewerID):  # noqa: E501
      # noqa: E501
 
     :param reviewerID: ID of Reviewer
-    :type reviewerID: str
+    :type reviewerID: int
 
     :rtype: None
     """
@@ -40,7 +40,7 @@ def get_reviewer_by_id(reviewerID):  # noqa: E501
      # noqa: E501
 
     :param reviewerID: ID of Reviewer
-    :type reviewerID: str
+    :type reviewerID: int
 
     :rtype: List[Reviewer]
     """
@@ -64,7 +64,7 @@ def update_reviewer(reviewerID, survey):  # noqa: E501
      # noqa: E501
 
     :param reviewerID: ID of Reviewer
-    :type reviewerID: str
+    :type reviewerID: int
     :param survey: New Version of the Reviewer
     :type survey: dict | bytes
 

@@ -15,17 +15,13 @@ class Review(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, reviewer_id: int=None, user_id: int=None, sentence_id: int=None, correct: bool=None, rule1: bool=None, rule2: bool=None, rule3: bool=None, rule4: bool=None, rule5: bool=None):  # noqa: E501
+    def __init__(self, reviewer_id: int=None, sentence_id: int=None, rule1: bool=None, rule2: bool=None, rule3: bool=None, rule4: bool=None, rule5: bool=None):  # noqa: E501
         """Review - a model defined in Swagger
 
         :param reviewer_id: The reviewer_id of this Review.  # noqa: E501
         :type reviewer_id: int
-        :param user_id: The user_id of this Review.  # noqa: E501
-        :type user_id: int
         :param sentence_id: The sentence_id of this Review.  # noqa: E501
         :type sentence_id: int
-        :param correct: The correct of this Review.  # noqa: E501
-        :type correct: bool
         :param rule1: The rule1 of this Review.  # noqa: E501
         :type rule1: bool
         :param rule2: The rule2 of this Review.  # noqa: E501
@@ -39,9 +35,7 @@ class Review(Model):
         """
         self.swagger_types = {
             'reviewer_id': int,
-            'user_id': int,
             'sentence_id': int,
-            'correct': bool,
             'rule1': bool,
             'rule2': bool,
             'rule3': bool,
@@ -51,9 +45,7 @@ class Review(Model):
 
         self.attribute_map = {
             'reviewer_id': 'reviewerID',
-            'user_id': 'userID',
             'sentence_id': 'sentenceID',
-            'correct': 'correct',
             'rule1': 'rule1',
             'rule2': 'rule2',
             'rule3': 'rule3',
@@ -62,9 +54,7 @@ class Review(Model):
         }
 
         self._reviewer_id = reviewer_id
-        self._user_id = user_id
         self._sentence_id = sentence_id
-        self._correct = correct
         self._rule1 = rule1
         self._rule2 = rule2
         self._rule3 = rule3
@@ -106,31 +96,6 @@ class Review(Model):
         self._reviewer_id = reviewer_id
 
     @property
-    def user_id(self) -> int:
-        """Gets the user_id of this Review.
-
-        Unique ID of the user who submitted the sentence  # noqa: E501
-
-        :return: The user_id of this Review.
-        :rtype: int
-        """
-        return self._user_id
-
-    @user_id.setter
-    def user_id(self, user_id: int):
-        """Sets the user_id of this Review.
-
-        Unique ID of the user who submitted the sentence  # noqa: E501
-
-        :param user_id: The user_id of this Review.
-        :type user_id: int
-        """
-        if user_id is None:
-            raise ValueError("Invalid value for `user_id`, must not be `None`")  # noqa: E501
-
-        self._user_id = user_id
-
-    @property
     def sentence_id(self) -> int:
         """Gets the sentence_id of this Review.
 
@@ -154,31 +119,6 @@ class Review(Model):
             raise ValueError("Invalid value for `sentence_id`, must not be `None`")  # noqa: E501
 
         self._sentence_id = sentence_id
-
-    @property
-    def correct(self) -> bool:
-        """Gets the correct of this Review.
-
-        Denotes wether the sentence is marked correct or not  # noqa: E501
-
-        :return: The correct of this Review.
-        :rtype: bool
-        """
-        return self._correct
-
-    @correct.setter
-    def correct(self, correct: bool):
-        """Sets the correct of this Review.
-
-        Denotes wether the sentence is marked correct or not  # noqa: E501
-
-        :param correct: The correct of this Review.
-        :type correct: bool
-        """
-        if correct is None:
-            raise ValueError("Invalid value for `correct`, must not be `None`")  # noqa: E501
-
-        self._correct = correct
 
     @property
     def rule1(self) -> bool:

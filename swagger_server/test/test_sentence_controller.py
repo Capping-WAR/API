@@ -33,7 +33,7 @@ class TestSentenceController(BaseTestCase):
         Delete a Sentence
         """
         response = self.client.open(
-            '/api/v1/sentence/{sentenceID}'.format(sentenceID='sentenceID_example'),
+            '/api/v1/sentence/{sentenceID}'.format(sentenceID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -44,7 +44,7 @@ class TestSentenceController(BaseTestCase):
         Get a Sentence by ID
         """
         response = self.client.open(
-            '/api/v1/sentence/{sentenceID}'.format(sentenceID='sentenceID_example'),
+            '/api/v1/sentence/{sentenceID}'.format(sentenceID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -67,7 +67,7 @@ class TestSentenceController(BaseTestCase):
         """
         survey = Sentence()
         response = self.client.open(
-            '/api/v1/sentence/{sentenceID}'.format(sentenceID='sentenceID_example'),
+            '/api/v1/sentence/{sentenceID}'.format(sentenceID=56),
             method='PUT',
             data=json.dumps(survey),
             content_type='application/json')

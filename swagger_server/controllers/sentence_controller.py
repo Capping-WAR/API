@@ -27,7 +27,7 @@ def delete_sentence(sentenceID):  # noqa: E501
      # noqa: E501
 
     :param sentenceID: ID of Sentence
-    :type sentenceID: str
+    :type sentenceID: int
 
     :rtype: None
     """
@@ -40,7 +40,7 @@ def get_sentence_by_id(sentenceID):  # noqa: E501
      # noqa: E501
 
     :param sentenceID: ID of Sentence
-    :type sentenceID: str
+    :type sentenceID: int
 
     :rtype: List[Sentence]
     """
@@ -64,7 +64,7 @@ def update_sentence(sentenceID, survey):  # noqa: E501
      # noqa: E501
 
     :param sentenceID: ID of Sentence
-    :type sentenceID: str
+    :type sentenceID: int
     :param survey: New Version of the Sentence
     :type survey: dict | bytes
 

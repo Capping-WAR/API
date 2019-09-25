@@ -6,70 +6,70 @@ from flask import json
 from six import BytesIO
 
 from swagger_server.models.request_info import RequestInfo  # noqa: E501
-from swagger_server.models.review import Review  # noqa: E501
+from swagger_server.models.version import Version  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
-class TestReviewController(BaseTestCase):
-    """ReviewController integration test stubs"""
+class TestVersionController(BaseTestCase):
+    """VersionController integration test stubs"""
 
-    def test_add_review(self):
-        """Test case for add_review
+    def test_add_version(self):
+        """Test case for add_version
 
-        Add a Review
+        Add a Version
         """
-        survey = Review()
+        Version = Version()
         response = self.client.open(
-            '/api/v1/review',
+            '/api/v1/version',
             method='POST',
-            data=json.dumps(survey),
+            data=json.dumps(Version),
             content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_delete_review(self):
-        """Test case for delete_review
+    def test_delete_version(self):
+        """Test case for delete_version
 
-        Delete a Review
+        Delete a Version
         """
         response = self.client.open(
-            '/api/v1/review/{reviewID}'.format(reviewID=56),
+            '/api/v1/version/{modelID}'.format(modelID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_get_review_by_id(self):
-        """Test case for get_review_by_id
+    def test_get_version_by_id(self):
+        """Test case for get_version_by_id
 
-        Get a Review by ID
+        Get a model version by modelID
         """
         response = self.client.open(
-            '/api/v1/review/{reviewID}'.format(reviewID=56),
+            '/api/v1/version/{modelID}'.format(modelID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_get_reviews(self):
-        """Test case for get_reviews
+    def test_get_versions(self):
+        """Test case for get_versions
 
-        Get all Reviews
+        Get all Versions
         """
         response = self.client.open(
-            '/api/v1/reviews',
+            '/api/v1/versions',
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_update_review(self):
-        """Test case for update_review
+    def test_update_version(self):
+        """Test case for update_version
 
-        Update a Review
+        Update a Version
         """
-        survey = Review()
+        Version = Version()
         response = self.client.open(
-            '/api/v1/review/{reviewID}'.format(reviewID=56),
+            '/api/v1/version/{modelID}'.format(modelID=56),
             method='PUT',
-            data=json.dumps(survey),
+            data=json.dumps(Version),
             content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

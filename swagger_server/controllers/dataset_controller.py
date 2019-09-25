@@ -27,7 +27,7 @@ def delete_datapoint(sentenceID):  # noqa: E501
      # noqa: E501
 
     :param sentenceID: ID of Sentence
-    :type sentenceID: str
+    :type sentenceID: int
 
     :rtype: None
     """
@@ -40,7 +40,7 @@ def get_datapoint_by_id(sentenceID):  # noqa: E501
      # noqa: E501
 
     :param sentenceID: ID of Sentence
-    :type sentenceID: str
+    :type sentenceID: int
 
     :rtype: List[Datapoint]
     """
@@ -64,7 +64,7 @@ def update_datapoint(sentenceID, Datapoint):  # noqa: E501
      # noqa: E501
 
     :param sentenceID: ID of Sentence
-    :type sentenceID: str
+    :type sentenceID: int
     :param Datapoint: New Version of the Datapoint
     :type Datapoint: dict | bytes
 

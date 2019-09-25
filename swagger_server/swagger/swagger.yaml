@@ -72,7 +72,7 @@ paths:
         in: "path"
         description: "ID of Reviewer"
         required: true
-        type: "string"
+        type: "integer"
       responses:
         200:
           description: "Reviewer successfully retrieved"
@@ -99,7 +99,7 @@ paths:
         in: "path"
         description: "ID of Reviewer"
         required: true
-        type: "string"
+        type: "integer"
       - in: "body"
         name: "survey"
         description: "New Version of the Reviewer"
@@ -126,7 +126,7 @@ paths:
         in: "path"
         description: "ID of Reviewer"
         required: true
-        type: "string"
+        type: "integer"
       responses:
         200:
           description: "Reviewer successfully deleted"
@@ -196,7 +196,7 @@ paths:
         in: "path"
         description: "ID of Review"
         required: true
-        type: "string"
+        type: "integer"
       responses:
         200:
           description: "Review successfully retrieved"
@@ -223,7 +223,7 @@ paths:
         in: "path"
         description: "ID of Review"
         required: true
-        type: "string"
+        type: "integer"
       - in: "body"
         name: "survey"
         description: "New Version of the Review"
@@ -250,7 +250,7 @@ paths:
         in: "path"
         description: "ID of Review"
         required: true
-        type: "string"
+        type: "integer"
       responses:
         200:
           description: "Review successfully deleted"
@@ -320,7 +320,7 @@ paths:
         in: "path"
         description: "ID of Sentence"
         required: true
-        type: "string"
+        type: "integer"
       responses:
         200:
           description: "Sentence successfully retrieved"
@@ -347,7 +347,7 @@ paths:
         in: "path"
         description: "ID of Sentence"
         required: true
-        type: "string"
+        type: "integer"
       - in: "body"
         name: "survey"
         description: "New Version of the Sentence"
@@ -374,7 +374,7 @@ paths:
         in: "path"
         description: "ID of Sentence"
         required: true
-        type: "string"
+        type: "integer"
       responses:
         200:
           description: "Sentence successfully deleted"
@@ -385,10 +385,10 @@ paths:
         404:
           description: "Sentence does not exist"
       x-swagger-router-controller: "swagger_server.controllers.sentence_controller"
-  /Data:
+  /Dataset:
     get:
       tags:
-      - "Data"
+      - "Dataset"
       summary: "Get all Datapoints"
       operationId: "get_datapoints"
       produces:
@@ -408,7 +408,7 @@ paths:
       x-swagger-router-controller: "swagger_server.controllers.data_controller"
     post:
       tags:
-      - "Data"
+      - "Dataset"
       summary: "Add a Datapoint"
       operationId: "add_datapoint"
       consumes:
@@ -433,7 +433,7 @@ paths:
   /data/{sentenceID}:
     get:
       tags:
-      - "Data"
+      - "Dataset"
       summary: "Get a datapoint by sentence ID"
       operationId: "get_datapoint_by_id"
       produces:
@@ -443,7 +443,7 @@ paths:
         in: "path"
         description: "ID of Sentence"
         required: true
-        type: "string"
+        type: "integer"
       responses:
         200:
           description: "Datapoint successfully retrieved"
@@ -460,7 +460,7 @@ paths:
       x-swagger-router-controller: "swagger_server.controllers.data_controller"
     put:
       tags:
-      - "Data"
+      - "Dataset"
       summary: "Update a Datapoint"
       operationId: "update_datapoint"
       produces:
@@ -470,7 +470,7 @@ paths:
         in: "path"
         description: "ID of Sentence"
         required: true
-        type: "string"
+        type: "integer"
       - in: "body"
         name: "Datapoint"
         description: "New Version of the Datapoint"
@@ -489,7 +489,7 @@ paths:
       x-swagger-router-controller: "swagger_server.controllers.data_controller"
     delete:
       tags:
-      - "Data"
+      - "Dataset"
       summary: "Delete a Datapoint"
       operationId: "delete_datapoint"
       parameters:
@@ -497,7 +497,7 @@ paths:
         in: "path"
         description: "ID of Sentence"
         required: true
-        type: "string"
+        type: "integer"
       responses:
         200:
           description: "Datapoint successfully deleted"
@@ -508,7 +508,164 @@ paths:
         404:
           description: "Datapoint does not exist"
       x-swagger-router-controller: "swagger_server.controllers.data_controller"
+  /versions:
+    get:
+      tags:
+      - "Version"
+      summary: "Get all Versions"
+      operationId: "get_versions"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Versions successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/version"
+        400:
+          description: "Versions retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.version_controller"
+  /version:
+    post:
+      tags:
+      - "Version"
+      summary: "Add a Version"
+      operationId: "add_version"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Version"
+        description: "Version to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/version"
+      responses:
+        201:
+          description: "Version successfully added"
+        400:
+          description: "Version add error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.version_controller"
+  /version/{modelID}:
+    get:
+      tags:
+      - "Version"
+      summary: "Get a model version by modelID"
+      operationId: "get_version_by_id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modelID"
+        in: "path"
+        description: "ID of Model"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Version successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/version"
+        400:
+          description: "Version retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Version does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.version_controller"
+    put:
+      tags:
+      - "Version"
+      summary: "Update a Version"
+      operationId: "update_version"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modelID"
+        in: "path"
+        description: "ID of Model"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "Version"
+        description: "Updated Version"
+        required: true
+        schema:
+          $ref: "#/definitions/version"
+      responses:
+        200:
+          description: "Version successfully updated"
+        400:
+          description: "Version update error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Version does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.version_controller"
+    delete:
+      tags:
+      - "Version"
+      summary: "Delete a Version"
+      operationId: "delete_version"
+      parameters:
+      - name: "modelID"
+        in: "path"
+        description: "ID of model"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Version successfully deleted"
+        400:
+          description: "Version delete error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Version does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.version_controller"
 definitions:
+  version:
+    required:
+    - "balAccuracy"
+    - "dateAdded"
+    - "location"
+    - "ruleNum"
+    properties:
+      modelID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the model"
+      balAccuracy:
+        type: "number"
+        example: 99.0
+        description: "Percentage Accuracy of the model"
+      ruleNum:
+        type: "integer"
+        example: 1
+        description: "Rule model coincides with"
+      location:
+        type: "string"
+        example: "/home/user/models"
+        description: "absolute path to model on disk"
+      dateAdded:
+        type: "string"
+        example: "2019-09-24 22:33:19.000"
+        description: "Date added to the database"
+    example:
+      modelID: 1
+      balAccuracy: 99
+      ruleNum: 3
+      location: "/home/user/models"
+      dateAdded: "2019-09-24 22:33:19.000"
   request_info:
     properties:
       status_code:
@@ -561,31 +718,21 @@ definitions:
       reputation: 93
   review:
     required:
-    - "correct"
     - "rule1"
     - "rule2"
     - "rule3"
     - "rule4"
     - "rule5"
     - "sentenceID"
-    - "userID"
     properties:
       reviewerID:
         type: "integer"
         example: 1
         description: "Unique ID of the review"
-      userID:
-        type: "integer"
-        example: 1
-        description: "Unique ID of the user who submitted the sentence"
       sentenceID:
         type: "integer"
         example: 1
         description: "Unique ID of the sentence that was submitted for review"
-      correct:
-        type: "boolean"
-        example: false
-        description: "Denotes wether the sentence is marked correct or not"
       rule1:
         type: "boolean"
         example: false
@@ -608,16 +755,15 @@ definitions:
         description: "Denotes wether this rule was broken by the sentence"
     example:
       reviewerID: 1
-      correct: false
       rule5: false
       rule4: false
       rule1: false
       sentenceID: 1
       rule3: false
       rule2: false
-      userID: 1
   sentence:
     required:
+    - "dateAdded"
     - "rule1"
     - "rule2"
     - "rule3"
@@ -658,6 +804,10 @@ definitions:
         type: "boolean"
         example: false
         description: "Denotes wether this rule was broken by the sentence"
+      dateAdded:
+        type: "string"
+        example: "2019-09-24 22:33:19.000"
+        description: "Date added to the database"
     example:
       sentence: "This is a sentence."
       rule5: false
@@ -667,9 +817,10 @@ definitions:
       rule3: false
       rule2: false
       userID: 1
+      dateAdded: "2019-09-24 22:33:19.000"
   datapoint:
     required:
-    - "correct"
+    - "dateAdded"
     - "rule1"
     - "rule2"
     - "rule3"
@@ -685,10 +836,6 @@ definitions:
         type: "string"
         example: "This is a sentence."
         description: "The user submitted sentence to be reviewed"
-      correct:
-        type: "boolean"
-        example: false
-        description: "Denotes wether the sentence is marked correct or not"
       rule1:
         type: "boolean"
         example: false
@@ -709,12 +856,16 @@ definitions:
         type: "boolean"
         example: false
         description: "Denotes wether this rule was broken by the sentence"
+      dateAdded:
+        type: "string"
+        example: "2019-09-24 22:33:19.000"
+        description: "Date added to the database"
     example:
+      sentenceID: 1
       sentence: "This is a sentence."
-      correct: false
       rule5: false
       rule4: false
       rule1: false
-      sentenceID: 1
       rule3: false
       rule2: false
+      dateAdded: "2019-09-24 22:33:19.000"

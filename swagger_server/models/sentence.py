@@ -15,7 +15,7 @@ class Sentence(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, sentence_id: int=None, user_id: int=None, sentence: str=None, rule1: bool=None, rule2: bool=None, rule3: bool=None, rule4: bool=None, rule5: bool=None):  # noqa: E501
+    def __init__(self, sentence_id: int=None, user_id: int=None, sentence: str=None, rule1: bool=None, rule2: bool=None, rule3: bool=None, rule4: bool=None, rule5: bool=None, date_added: str=None):  # noqa: E501
         """Sentence - a model defined in Swagger
 
         :param sentence_id: The sentence_id of this Sentence.  # noqa: E501
@@ -34,6 +34,8 @@ class Sentence(Model):
         :type rule4: bool
         :param rule5: The rule5 of this Sentence.  # noqa: E501
         :type rule5: bool
+        :param date_added: The date_added of this Sentence.  # noqa: E501
+        :type date_added: str
         """
         self.swagger_types = {
             'sentence_id': int,
@@ -43,7 +45,8 @@ class Sentence(Model):
             'rule2': bool,
             'rule3': bool,
             'rule4': bool,
-            'rule5': bool
+            'rule5': bool,
+            'date_added': str
         }
 
         self.attribute_map = {
@@ -54,7 +57,8 @@ class Sentence(Model):
             'rule2': 'rule2',
             'rule3': 'rule3',
             'rule4': 'rule4',
-            'rule5': 'rule5'
+            'rule5': 'rule5',
+            'date_added': 'dateAdded'
         }
 
         self._sentence_id = sentence_id
@@ -65,6 +69,7 @@ class Sentence(Model):
         self._rule3 = rule3
         self._rule4 = rule4
         self._rule5 = rule5
+        self._date_added = date_added
 
     @classmethod
     def from_dict(cls, dikt) -> 'Sentence':
@@ -274,3 +279,28 @@ class Sentence(Model):
             raise ValueError("Invalid value for `rule5`, must not be `None`")  # noqa: E501
 
         self._rule5 = rule5
+
+    @property
+    def date_added(self) -> str:
+        """Gets the date_added of this Sentence.
+
+        Date added to the database  # noqa: E501
+
+        :return: The date_added of this Sentence.
+        :rtype: str
+        """
+        return self._date_added
+
+    @date_added.setter
+    def date_added(self, date_added: str):
+        """Sets the date_added of this Sentence.
+
+        Date added to the database  # noqa: E501
+
+        :param date_added: The date_added of this Sentence.
+        :type date_added: str
+        """
+        if date_added is None:
+            raise ValueError("Invalid value for `date_added`, must not be `None`")  # noqa: E501
+
+        self._date_added = date_added

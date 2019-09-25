@@ -8,3 +8,4 @@ from swagger_server.models.request_info import RequestInfo
 from swagger_server.models.review import Review
 from swagger_server.models.reviewer import Reviewer
 from swagger_server.models.sentence import Sentence
+from swagger_server.models.version import Version

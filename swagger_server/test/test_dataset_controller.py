@@ -10,8 +10,8 @@ from swagger_server.models.request_info import RequestInfo  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
-class TestDataController(BaseTestCase):
-    """DataController integration test stubs"""
+class TestDatasetController(BaseTestCase):
+    """DatasetController integration test stubs"""
 
     def test_add_datapoint(self):
         """Test case for add_datapoint
@@ -20,7 +20,7 @@ class TestDataController(BaseTestCase):
         """
         Datapoint = Datapoint()
         response = self.client.open(
-            '/api/v1/Data',
+            '/api/v1/Dataset',
             method='POST',
             data=json.dumps(Datapoint),
             content_type='application/json')
@@ -33,7 +33,7 @@ class TestDataController(BaseTestCase):
         Delete a Datapoint
         """
         response = self.client.open(
-            '/api/v1/data/{sentenceID}'.format(sentenceID='sentenceID_example'),
+            '/api/v1/data/{sentenceID}'.format(sentenceID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -44,7 +44,7 @@ class TestDataController(BaseTestCase):
         Get a datapoint by sentence ID
         """
         response = self.client.open(
-            '/api/v1/data/{sentenceID}'.format(sentenceID='sentenceID_example'),
+            '/api/v1/data/{sentenceID}'.format(sentenceID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -55,7 +55,7 @@ class TestDataController(BaseTestCase):
         Get all Datapoints
         """
         response = self.client.open(
-            '/api/v1/Data',
+            '/api/v1/Dataset',
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -67,7 +67,7 @@ class TestDataController(BaseTestCase):
         """
         Datapoint = Datapoint()
         response = self.client.open(
-            '/api/v1/data/{sentenceID}'.format(sentenceID='sentenceID_example'),
+            '/api/v1/data/{sentenceID}'.format(sentenceID=56),
             method='PUT',
             data=json.dumps(Datapoint),
             content_type='application/json')

@@ -27,7 +27,7 @@ def delete_review(reviewID):  # noqa: E501
      # noqa: E501
 
     :param reviewID: ID of Review
-    :type reviewID: str
+    :type reviewID: int
 
     :rtype: None
     """
@@ -40,7 +40,7 @@ def get_review_by_id(reviewID):  # noqa: E501
      # noqa: E501
 
     :param reviewID: ID of Review
-    :type reviewID: str
+    :type reviewID: int
 
     :rtype: List[Review]
     """
@@ -64,7 +64,7 @@ def update_review(reviewID, survey):  # noqa: E501
      # noqa: E501
 
     :param reviewID: ID of Review
-    :type reviewID: str
+    :type reviewID: int
     :param survey: New Version of the Review
     :type survey: dict | bytes
 
