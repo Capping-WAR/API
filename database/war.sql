@@ -3,68 +3,83 @@
 -- Date: 2019-09-20
 -- Author: Dayna Eidle
 
+\c war;
+
 -- create statements --
 
 --Reviewers--
 create table Reviewers(
 	reviewerId    integer not null,
-	emailAddress  char not null,
+	emailAddress  text not null,
 	firstName     text not null,
 	lastName      text not null,
-	checkAdmin    text not null CHECK(checkAdmin = 'YES' or checkAdmin = 'NO'),
+	isAdmin       bool not null,
 	reputation    integer not null,
   primary key (reviewerId)
 );
 
+--Rules--
+create table Rules(
+	ruleId      SERIAL PRIMARY KEY,
+	ruleName    text not null,
+	description text not null,
+	priority    decimal not null
+);
+
 --Sentences--
 create table Sentences(
-	sentenceId integer not null,
-	userId     integer not null,
-	sentence   text not null,
-	rule1      bytea not null,
-	rule2      bytea not null,
-	rule3      bytea not null,
-	rule4      bytea not null,
-	rule5      bytea not null,
-	dateAdded  timestamp not null,
-  primary key(sentenceId)
+	sentenceId   SERIAL PRIMARY KEY,
+	userId       integer not null,
+	sentence     text not null,
+	taggedRuleId integer not null references Rules(ruleId),
+	dateAdded 	 timestamp not null
 );
 
---Reviews--
-create table Reviews(
-	reviewId      integer not null,
-	reviewerId    integer not null references Reviewers(reviewerId),
+
+--People Reviews--
+create table PeopleReviews(
 	sentenceId    integer not null references Sentences(sentenceId),
-	rule1         bytea not null,
-	rule2         bytea not null,
-	rule3         bytea not null,
-	rule4         bytea not null,
-	rule5         bytea not null,
-	dateAdded     timestamp not null,
-  primary key (reviewId)
+	reviewerId   integer not null references Reviewers(reviewerId),
+	ruleReviewId integer not null references Rules(ruleId),
+	ruleReview   integer not null,
+	dateAdded    timestamp not null,
+  primary key(sentenceId, reviewerId, ruleReviewId)
 );
 
---Dataset--
-create table Dataset(
-	sentenceId    integer not null references Sentences(sentenceId),
+--Models--
+create table Models(
+	modelId   SERIAL PRIMARY KEY,
+    modelVersion SERIAL,
+	balAccuracy  decimal not null,
+	loc          text not null,
+	dateAdded    timestamp not null
+    UNIQUE(modelId, modelVersion)
+);
+
+--Model Reviews--
+create table ModelReviews(
+	sentenceId   integer not null references Sentences(sentenceId),
+	ruleId       integer not null references Rules(ruleId),
+	modelId      integer not null,
+	modelVersion integer not null,
+	foreign key (modelID, modelVersion) references Models(modelId, modelVersion),
+  primary key(sentenceId, ruleId, modelId, modelVersion)
+);
+
+--TrainingDataset
+create table TrainingDataset(
+	sentenceId    integer not null,
 	sentence      text not null,
-	rule1         bytea not null,
-	rule2         bytea not null,
-	rule3         bytea not null,
-	rule4         bytea not null,
-	rule5         bytea not null,
+	ruleCorrectId integer not null,
+	ruleCorrect   decimal not null,
 	dateAdded     timestamp not null,
-  primary key (sentenceId)
+  primary key(sentenceId, ruleCorrectId)
 );
 
---Versions--
-create table Versions(
-	modelId     integer not null,
-	balAccuracy decimal not null,
-	ruleNum     integer not null,
-	loc         text not null,
-	dateAdded   timestamp not null,
-  primary key (modelId)
+--SentenceRules--
+create table SentenceRules(
+	sentenceId   integer not null references Sentences(sentenceId),
+	taggedRuleId integer not null references Rules(ruleId),
+	status       text not null,
+  primary key(sentenceId, taggedRuleId)
 );
-
-
