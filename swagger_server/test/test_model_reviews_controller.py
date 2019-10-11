@@ -5,71 +5,72 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
+from swagger_server.models.model_review import ModelReview  # noqa: E501
 from swagger_server.models.request_info import RequestInfo  # noqa: E501
-from swagger_server.models.sentence import Sentence  # noqa: E501
+from swagger_server.models.rule import Rule  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
-class TestSentenceController(BaseTestCase):
-    """SentenceController integration test stubs"""
+class TestModelReviewsController(BaseTestCase):
+    """ModelReviewsController integration test stubs"""
 
-    def test_add_sentence(self):
-        """Test case for add_sentence
+    def test_add_model_review(self):
+        """Test case for add_model_review
 
-        Add a Sentence
+        Add a Model Review
         """
-        sentence = Sentence()
+        model_review = ModelReview()
         response = self.client.open(
-            '/api/v1/sentence',
+            '/api/v1/modelReview',
             method='POST',
-            data=json.dumps(sentence),
+            data=json.dumps(model_review),
             content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_delete_sentence(self):
-        """Test case for delete_sentence
+    def test_delete_model_review(self):
+        """Test case for delete_model_review
 
-        Delete a Sentence
+        Delete a Model Review
         """
         response = self.client.open(
-            '/api/v1/sentence/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/modelReview/{sentenceID}'.format(sentenceID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_get_sentence_by_id(self):
-        """Test case for get_sentence_by_id
+    def test_get_model_review_by_id(self):
+        """Test case for get_model_review_by_id
 
-        Get a Sentence by ID
+        Get a Rule by sentenceID
         """
         response = self.client.open(
-            '/api/v1/sentence/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/modelReview/{sentenceID}'.format(sentenceID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_get_sentences(self):
-        """Test case for get_sentences
+    def test_get_model_reviews(self):
+        """Test case for get_model_reviews
 
-        Get all Sentences
+        Get all Model Reviews
         """
         response = self.client.open(
-            '/api/v1/sentences',
+            '/api/v1/modelReviews',
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_update_sentence(self):
-        """Test case for update_sentence
+    def test_update_model_review(self):
+        """Test case for update_model_review
 
-        Update a Sentence
+        Update a Model Review
         """
-        sentence = Sentence()
+        Model_Review = Rule()
         response = self.client.open(
-            '/api/v1/sentence/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/modelReview/{sentenceID}'.format(sentenceID=56),
             method='PUT',
-            data=json.dumps(sentence),
+            data=json.dumps(Model_Review),
             content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

@@ -5,71 +5,71 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
+from swagger_server.models.people_review import PeopleReview  # noqa: E501
 from swagger_server.models.request_info import RequestInfo  # noqa: E501
-from swagger_server.models.sentence import Sentence  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
-class TestSentenceController(BaseTestCase):
-    """SentenceController integration test stubs"""
+class TestPeopleReviewController(BaseTestCase):
+    """PeopleReviewController integration test stubs"""
 
-    def test_add_sentence(self):
-        """Test case for add_sentence
+    def test_add_people_review(self):
+        """Test case for add_people_review
 
-        Add a Sentence
+        Add a People Review
         """
-        sentence = Sentence()
+        people_review = PeopleReview()
         response = self.client.open(
-            '/api/v1/sentence',
+            '/api/v1/review',
             method='POST',
-            data=json.dumps(sentence),
+            data=json.dumps(people_review),
             content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_delete_sentence(self):
-        """Test case for delete_sentence
+    def test_delete_people_review(self):
+        """Test case for delete_people_review
 
-        Delete a Sentence
+        Delete a People Review
         """
         response = self.client.open(
-            '/api/v1/sentence/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/review/{peopleReviewID}'.format(peopleReviewID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_get_sentence_by_id(self):
-        """Test case for get_sentence_by_id
+    def test_get_people_review_by_id(self):
+        """Test case for get_people_review_by_id
 
-        Get a Sentence by ID
+        Get a People Review by ID
         """
         response = self.client.open(
-            '/api/v1/sentence/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/review/{peopleReviewID}'.format(peopleReviewID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_get_sentences(self):
-        """Test case for get_sentences
+    def test_get_people_reviews(self):
+        """Test case for get_people_reviews
 
-        Get all Sentences
+        Get all People Reviews
         """
         response = self.client.open(
-            '/api/v1/sentences',
+            '/api/v1/reviews',
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_update_sentence(self):
-        """Test case for update_sentence
+    def test_update_people_review(self):
+        """Test case for update_people_review
 
-        Update a Sentence
+        Update a People Review
         """
-        sentence = Sentence()
+        people_review = PeopleReview()
         response = self.client.open(
-            '/api/v1/sentence/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/review/{peopleReviewID}'.format(peopleReviewID=56),
             method='PUT',
-            data=json.dumps(sentence),
+            data=json.dumps(people_review),
             content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

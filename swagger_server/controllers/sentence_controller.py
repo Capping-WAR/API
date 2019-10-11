@@ -6,18 +6,18 @@ from swagger_server.models.sentence import Sentence  # noqa: E501
 from swagger_server import util
 
 
-def add_sentence(survey):  # noqa: E501
+def add_sentence(sentence):  # noqa: E501
     """Add a Sentence
 
      # noqa: E501
 
-    :param survey: Sentence to be added
-    :type survey: dict | bytes
+    :param sentence: Sentence to be added
+    :type sentence: dict | bytes
 
     :rtype: None
     """
     if connexion.request.is_json:
-        survey = Sentence.from_dict(connexion.request.get_json())  # noqa: E501
+        sentence = Sentence.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 
@@ -58,18 +58,18 @@ def get_sentences():  # noqa: E501
     return 'do some magic!'
 
 
-def update_sentence(sentenceID, survey):  # noqa: E501
+def update_sentence(sentenceID, sentence):  # noqa: E501
     """Update a Sentence
 
      # noqa: E501
 
     :param sentenceID: ID of Sentence
     :type sentenceID: int
-    :param survey: New Version of the Sentence
-    :type survey: dict | bytes
+    :param sentence: New Version of the Sentence
+    :type sentence: dict | bytes
 
     :rtype: None
     """
     if connexion.request.is_json:
-        survey = Sentence.from_dict(connexion.request.get_json())  # noqa: E501
+        sentence = Sentence.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'

@@ -15,60 +15,40 @@ class Sentence(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, sentence_id: int=None, user_id: int=None, sentence: str=None, rule1: bool=None, rule2: bool=None, rule3: bool=None, rule4: bool=None, rule5: bool=None, date_added: str=None):  # noqa: E501
+    def __init__(self, sentence_id: int=None, user_id: int=None, tagged_rule_id: int=None, sentence: str=None, date_added: str=None):  # noqa: E501
         """Sentence - a model defined in Swagger
 
         :param sentence_id: The sentence_id of this Sentence.  # noqa: E501
         :type sentence_id: int
         :param user_id: The user_id of this Sentence.  # noqa: E501
         :type user_id: int
+        :param tagged_rule_id: The tagged_rule_id of this Sentence.  # noqa: E501
+        :type tagged_rule_id: int
         :param sentence: The sentence of this Sentence.  # noqa: E501
         :type sentence: str
-        :param rule1: The rule1 of this Sentence.  # noqa: E501
-        :type rule1: bool
-        :param rule2: The rule2 of this Sentence.  # noqa: E501
-        :type rule2: bool
-        :param rule3: The rule3 of this Sentence.  # noqa: E501
-        :type rule3: bool
-        :param rule4: The rule4 of this Sentence.  # noqa: E501
-        :type rule4: bool
-        :param rule5: The rule5 of this Sentence.  # noqa: E501
-        :type rule5: bool
         :param date_added: The date_added of this Sentence.  # noqa: E501
         :type date_added: str
         """
         self.swagger_types = {
             'sentence_id': int,
             'user_id': int,
+            'tagged_rule_id': int,
             'sentence': str,
-            'rule1': bool,
-            'rule2': bool,
-            'rule3': bool,
-            'rule4': bool,
-            'rule5': bool,
             'date_added': str
         }
 
         self.attribute_map = {
             'sentence_id': 'sentenceID',
             'user_id': 'userID',
+            'tagged_rule_id': 'taggedRuleID',
             'sentence': 'sentence',
-            'rule1': 'rule1',
-            'rule2': 'rule2',
-            'rule3': 'rule3',
-            'rule4': 'rule4',
-            'rule5': 'rule5',
             'date_added': 'dateAdded'
         }
 
         self._sentence_id = sentence_id
         self._user_id = user_id
+        self._tagged_rule_id = tagged_rule_id
         self._sentence = sentence
-        self._rule1 = rule1
-        self._rule2 = rule2
-        self._rule3 = rule3
-        self._rule4 = rule4
-        self._rule5 = rule5
         self._date_added = date_added
 
     @classmethod
@@ -131,6 +111,31 @@ class Sentence(Model):
         self._user_id = user_id
 
     @property
+    def tagged_rule_id(self) -> int:
+        """Gets the tagged_rule_id of this Sentence.
+
+        the rule tagged for review by the user  # noqa: E501
+
+        :return: The tagged_rule_id of this Sentence.
+        :rtype: int
+        """
+        return self._tagged_rule_id
+
+    @tagged_rule_id.setter
+    def tagged_rule_id(self, tagged_rule_id: int):
+        """Sets the tagged_rule_id of this Sentence.
+
+        the rule tagged for review by the user  # noqa: E501
+
+        :param tagged_rule_id: The tagged_rule_id of this Sentence.
+        :type tagged_rule_id: int
+        """
+        if tagged_rule_id is None:
+            raise ValueError("Invalid value for `tagged_rule_id`, must not be `None`")  # noqa: E501
+
+        self._tagged_rule_id = tagged_rule_id
+
+    @property
     def sentence(self) -> str:
         """Gets the sentence of this Sentence.
 
@@ -154,131 +159,6 @@ class Sentence(Model):
             raise ValueError("Invalid value for `sentence`, must not be `None`")  # noqa: E501
 
         self._sentence = sentence
-
-    @property
-    def rule1(self) -> bool:
-        """Gets the rule1 of this Sentence.
-
-        Denotes wether this rule was broken by the sentence  # noqa: E501
-
-        :return: The rule1 of this Sentence.
-        :rtype: bool
-        """
-        return self._rule1
-
-    @rule1.setter
-    def rule1(self, rule1: bool):
-        """Sets the rule1 of this Sentence.
-
-        Denotes wether this rule was broken by the sentence  # noqa: E501
-
-        :param rule1: The rule1 of this Sentence.
-        :type rule1: bool
-        """
-        if rule1 is None:
-            raise ValueError("Invalid value for `rule1`, must not be `None`")  # noqa: E501
-
-        self._rule1 = rule1
-
-    @property
-    def rule2(self) -> bool:
-        """Gets the rule2 of this Sentence.
-
-        Denotes wether this rule was broken by the sentence  # noqa: E501
-
-        :return: The rule2 of this Sentence.
-        :rtype: bool
-        """
-        return self._rule2
-
-    @rule2.setter
-    def rule2(self, rule2: bool):
-        """Sets the rule2 of this Sentence.
-
-        Denotes wether this rule was broken by the sentence  # noqa: E501
-
-        :param rule2: The rule2 of this Sentence.
-        :type rule2: bool
-        """
-        if rule2 is None:
-            raise ValueError("Invalid value for `rule2`, must not be `None`")  # noqa: E501
-
-        self._rule2 = rule2
-
-    @property
-    def rule3(self) -> bool:
-        """Gets the rule3 of this Sentence.
-
-        Denotes wether this rule was broken by the sentence  # noqa: E501
-
-        :return: The rule3 of this Sentence.
-        :rtype: bool
-        """
-        return self._rule3
-
-    @rule3.setter
-    def rule3(self, rule3: bool):
-        """Sets the rule3 of this Sentence.
-
-        Denotes wether this rule was broken by the sentence  # noqa: E501
-
-        :param rule3: The rule3 of this Sentence.
-        :type rule3: bool
-        """
-        if rule3 is None:
-            raise ValueError("Invalid value for `rule3`, must not be `None`")  # noqa: E501
-
-        self._rule3 = rule3
-
-    @property
-    def rule4(self) -> bool:
-        """Gets the rule4 of this Sentence.
-
-        Denotes wether this rule was broken by the sentence  # noqa: E501
-
-        :return: The rule4 of this Sentence.
-        :rtype: bool
-        """
-        return self._rule4
-
-    @rule4.setter
-    def rule4(self, rule4: bool):
-        """Sets the rule4 of this Sentence.
-
-        Denotes wether this rule was broken by the sentence  # noqa: E501
-
-        :param rule4: The rule4 of this Sentence.
-        :type rule4: bool
-        """
-        if rule4 is None:
-            raise ValueError("Invalid value for `rule4`, must not be `None`")  # noqa: E501
-
-        self._rule4 = rule4
-
-    @property
-    def rule5(self) -> bool:
-        """Gets the rule5 of this Sentence.
-
-        Denotes wether this rule was broken by the sentence  # noqa: E501
-
-        :return: The rule5 of this Sentence.
-        :rtype: bool
-        """
-        return self._rule5
-
-    @rule5.setter
-    def rule5(self, rule5: bool):
-        """Sets the rule5 of this Sentence.
-
-        Denotes wether this rule was broken by the sentence  # noqa: E501
-
-        :param rule5: The rule5 of this Sentence.
-        :type rule5: bool
-        """
-        if rule5 is None:
-            raise ValueError("Invalid value for `rule5`, must not be `None`")  # noqa: E501
-
-        self._rule5 = rule5
 
     @property
     def date_added(self) -> str:

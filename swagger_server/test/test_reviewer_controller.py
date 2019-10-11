@@ -18,11 +18,11 @@ class TestReviewerController(BaseTestCase):
 
         Add a Reviewer
         """
-        survey = Reviewer()
+        reviewer = Reviewer()
         response = self.client.open(
             '/api/v1/reviewer',
             method='POST',
-            data=json.dumps(survey),
+            data=json.dumps(reviewer),
             content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -65,11 +65,11 @@ class TestReviewerController(BaseTestCase):
 
         Update a Reviewer
         """
-        survey = Reviewer()
+        reviewer = Reviewer()
         response = self.client.open(
             '/api/v1/reviewer/{reviewerID}'.format(reviewerID=56),
             method='PUT',
-            data=json.dumps(survey),
+            data=json.dumps(reviewer),
             content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

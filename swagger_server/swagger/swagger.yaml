@@ -46,7 +46,7 @@ paths:
       - "application/json"
       parameters:
       - in: "body"
-        name: "survey"
+        name: "reviewer"
         description: "Reviewer to be added"
         required: true
         schema:
@@ -101,7 +101,7 @@ paths:
         required: true
         type: "integer"
       - in: "body"
-        name: "survey"
+        name: "reviewer"
         description: "New Version of the Reviewer"
         required: true
         schema:
@@ -140,127 +140,127 @@ paths:
   /reviews:
     get:
       tags:
-      - "Review"
-      summary: "Get all Reviews"
-      operationId: "get_reviews"
+      - "People Review"
+      summary: "Get all People Reviews"
+      operationId: "get_people_reviews"
       produces:
       - "application/json"
       parameters: []
       responses:
         200:
-          description: "Reviews successfully retrieved"
+          description: "People Reviews successfully retrieved"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/review"
+              $ref: "#/definitions/people_review"
         400:
-          description: "Reviews retrieval error"
+          description: "People Reviews retrieval error"
           schema:
             $ref: "#/definitions/request_info"
-      x-swagger-router-controller: "swagger_server.controllers.review_controller"
+      x-swagger-router-controller: "swagger_server.controllers.people_review_controller"
   /review:
     post:
       tags:
-      - "Review"
-      summary: "Add a Review"
-      operationId: "add_review"
+      - "People Review"
+      summary: "Add a People Review"
+      operationId: "add_people_review"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
       - in: "body"
-        name: "survey"
-        description: "Review to be added"
+        name: "people_review"
+        description: "People Review to be added"
         required: true
         schema:
-          $ref: "#/definitions/review"
+          $ref: "#/definitions/people_review"
       responses:
         201:
-          description: "Review successfully added"
+          description: "People Review successfully added"
         400:
-          description: "Review add error"
+          description: "People Review add error"
           schema:
             $ref: "#/definitions/request_info"
-      x-swagger-router-controller: "swagger_server.controllers.review_controller"
-  /review/{reviewID}:
+      x-swagger-router-controller: "swagger_server.controllers.people_review_controller"
+  /review/{peopleReviewID}:
     get:
       tags:
-      - "Review"
-      summary: "Get a Review by ID"
-      operationId: "get_review_by_id"
+      - "People Review"
+      summary: "Get a People Review by ID"
+      operationId: "get_people_review_by_id"
       produces:
       - "application/json"
       parameters:
-      - name: "reviewID"
+      - name: "peopleReviewID"
         in: "path"
-        description: "ID of Review"
+        description: "ID of People Review"
         required: true
         type: "integer"
       responses:
         200:
-          description: "Review successfully retrieved"
+          description: "People Review successfully retrieved"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/review"
+              $ref: "#/definitions/people_review"
         400:
-          description: "Review retrieval error"
+          description: "People Review retrieval error"
           schema:
             $ref: "#/definitions/request_info"
         404:
           description: "Review does not exist"
-      x-swagger-router-controller: "swagger_server.controllers.review_controller"
+      x-swagger-router-controller: "swagger_server.controllers.people_review_controller"
     put:
       tags:
-      - "Review"
-      summary: "Update a Review"
-      operationId: "update_review"
+      - "People Review"
+      summary: "Update a People Review"
+      operationId: "update_people_review"
       produces:
       - "application/json"
       parameters:
-      - name: "reviewID"
+      - name: "peopleReviewID"
         in: "path"
-        description: "ID of Review"
+        description: "ID of People Review"
         required: true
         type: "integer"
       - in: "body"
-        name: "survey"
-        description: "New Version of the Review"
+        name: "people_review"
+        description: "New Version of the People Review"
         required: true
         schema:
-          $ref: "#/definitions/review"
+          $ref: "#/definitions/people_review"
       responses:
         200:
-          description: "Review successfully updated"
+          description: "People Review successfully updated"
         400:
-          description: "Review update error"
+          description: "People Review update error"
           schema:
             $ref: "#/definitions/request_info"
         404:
-          description: "Review does not exist"
-      x-swagger-router-controller: "swagger_server.controllers.review_controller"
+          description: "People Review does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.people_review_controller"
     delete:
       tags:
-      - "Review"
-      summary: "Delete a Review"
-      operationId: "delete_review"
+      - "People Review"
+      summary: "Delete a People Review"
+      operationId: "delete_people_review"
       parameters:
-      - name: "reviewID"
+      - name: "peopleReviewID"
         in: "path"
-        description: "ID of Review"
+        description: "ID of People Review"
         required: true
         type: "integer"
       responses:
         200:
-          description: "Review successfully deleted"
+          description: "People Review successfully deleted"
         400:
-          description: "Review delete error"
+          description: "People Review delete error"
           schema:
             $ref: "#/definitions/request_info"
         404:
-          description: "Review does not exist"
-      x-swagger-router-controller: "swagger_server.controllers.review_controller"
+          description: "People Review does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.people_review_controller"
   /sentences:
     get:
       tags:
@@ -294,7 +294,7 @@ paths:
       - "application/json"
       parameters:
       - in: "body"
-        name: "survey"
+        name: "sentence"
         description: "Sentence to be added"
         required: true
         schema:
@@ -349,7 +349,7 @@ paths:
         required: true
         type: "integer"
       - in: "body"
-        name: "survey"
+        name: "sentence"
         description: "New Version of the Sentence"
         required: true
         schema:
@@ -385,181 +385,181 @@ paths:
         404:
           description: "Sentence does not exist"
       x-swagger-router-controller: "swagger_server.controllers.sentence_controller"
-  /Dataset:
+  /TrainingDataset:
     get:
       tags:
-      - "Dataset"
-      summary: "Get all Datapoints"
-      operationId: "get_datapoints"
+      - "TrainingDataset"
+      summary: "Get all Data Entries"
+      operationId: "get_data_entrys"
       produces:
       - "application/json"
       parameters: []
       responses:
         200:
-          description: "Data successfully retrieved"
+          description: "Data Entries successfully retrieved"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/datapoint"
+              $ref: "#/definitions/dataEntry"
         400:
-          description: "Data retrieval error"
+          description: "Data Entries retrieval error"
           schema:
             $ref: "#/definitions/request_info"
-      x-swagger-router-controller: "swagger_server.controllers.data_controller"
+      x-swagger-router-controller: "swagger_server.controllers.training_dataset_controller"
     post:
       tags:
-      - "Dataset"
-      summary: "Add a Datapoint"
-      operationId: "add_datapoint"
+      - "TrainingDataset"
+      summary: "Add a Data Entry"
+      operationId: "add_data_entry"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
       - in: "body"
-        name: "Datapoint"
-        description: "Datapoint to be added"
+        name: "dataEntry"
+        description: "dataEntry to be added"
         required: true
         schema:
-          $ref: "#/definitions/datapoint"
+          $ref: "#/definitions/dataEntry"
       responses:
         201:
-          description: "Datapoint successfully added"
+          description: "Data Entry successfully added"
         400:
-          description: "Datapoint add error"
+          description: "Data Entry add error"
           schema:
             $ref: "#/definitions/request_info"
-      x-swagger-router-controller: "swagger_server.controllers.data_controller"
-  /data/{sentenceID}:
+      x-swagger-router-controller: "swagger_server.controllers.training_dataset_controller"
+  /TrainingDataset/{ID}:
     get:
       tags:
-      - "Dataset"
-      summary: "Get a datapoint by sentence ID"
-      operationId: "get_datapoint_by_id"
+      - "TrainingDataset"
+      summary: "Get a Data Entry by ID"
+      operationId: "get_data_entry_by_id"
       produces:
       - "application/json"
       parameters:
-      - name: "sentenceID"
+      - name: "ID"
         in: "path"
-        description: "ID of Sentence"
+        description: "ID of Data Entry"
         required: true
         type: "integer"
       responses:
         200:
-          description: "Datapoint successfully retrieved"
+          description: "Data Entry successfully retrieved"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/datapoint"
+              $ref: "#/definitions/dataEntry"
         400:
-          description: "Datapoint retrieval error"
+          description: "Data Entry retrieval error"
           schema:
             $ref: "#/definitions/request_info"
         404:
-          description: "Datapoint does not exist"
-      x-swagger-router-controller: "swagger_server.controllers.data_controller"
+          description: "Data Entry does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.training_dataset_controller"
     put:
       tags:
-      - "Dataset"
-      summary: "Update a Datapoint"
-      operationId: "update_datapoint"
+      - "TrainingDataset"
+      summary: "Update a Data Entry"
+      operationId: "update_data_entry"
       produces:
       - "application/json"
       parameters:
-      - name: "sentenceID"
+      - name: "ID"
         in: "path"
-        description: "ID of Sentence"
+        description: "ID of Data Entry"
         required: true
         type: "integer"
       - in: "body"
-        name: "Datapoint"
-        description: "New Version of the Datapoint"
+        name: "dataEntry"
+        description: "New Version of the Data Entry"
         required: true
         schema:
-          $ref: "#/definitions/datapoint"
+          $ref: "#/definitions/dataEntry"
       responses:
         200:
-          description: "Datapoint successfully updated"
+          description: "Data Entry successfully updated"
         400:
-          description: "Datapoint update error"
+          description: "Data Entry update error"
           schema:
             $ref: "#/definitions/request_info"
         404:
-          description: "Datapoint does not exist"
-      x-swagger-router-controller: "swagger_server.controllers.data_controller"
+          description: "Data Entry does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.training_dataset_controller"
     delete:
       tags:
-      - "Dataset"
-      summary: "Delete a Datapoint"
-      operationId: "delete_datapoint"
+      - "TrainingDataset"
+      summary: "Delete a Data Entry"
+      operationId: "delete_data_entry"
       parameters:
-      - name: "sentenceID"
+      - name: "ID"
         in: "path"
-        description: "ID of Sentence"
+        description: "ID of Data Entry"
         required: true
         type: "integer"
       responses:
         200:
-          description: "Datapoint successfully deleted"
+          description: "Data Entry successfully deleted"
         400:
-          description: "Datapoint delete error"
+          description: "Data Entry delete error"
           schema:
             $ref: "#/definitions/request_info"
         404:
-          description: "Datapoint does not exist"
-      x-swagger-router-controller: "swagger_server.controllers.data_controller"
-  /versions:
+          description: "Data Entry does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.training_dataset_controller"
+  /models:
     get:
       tags:
-      - "Version"
-      summary: "Get all Versions"
-      operationId: "get_versions"
+      - "Models"
+      summary: "Get all Models"
+      operationId: "get_models"
       produces:
       - "application/json"
       parameters: []
       responses:
         200:
-          description: "Versions successfully retrieved"
+          description: "Models successfully retrieved"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/version"
+              $ref: "#/definitions/model"
         400:
-          description: "Versions retrieval error"
+          description: "Models retrieval error"
           schema:
             $ref: "#/definitions/request_info"
-      x-swagger-router-controller: "swagger_server.controllers.version_controller"
-  /version:
+      x-swagger-router-controller: "swagger_server.controllers.models_controller"
+  /model:
     post:
       tags:
-      - "Version"
-      summary: "Add a Version"
-      operationId: "add_version"
+      - "Models"
+      summary: "Add a Model"
+      operationId: "add_model"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
       - in: "body"
-        name: "Version"
-        description: "Version to be added"
+        name: "Model"
+        description: "Model to be added"
         required: true
         schema:
-          $ref: "#/definitions/version"
+          $ref: "#/definitions/model"
       responses:
         201:
-          description: "Version successfully added"
+          description: "Model successfully added"
         400:
-          description: "Version add error"
+          description: "Model add error"
           schema:
             $ref: "#/definitions/request_info"
-      x-swagger-router-controller: "swagger_server.controllers.version_controller"
-  /version/{modelID}:
+      x-swagger-router-controller: "swagger_server.controllers.models_controller"
+  /model/{modelID}:
     get:
       tags:
-      - "Version"
+      - "Models"
       summary: "Get a model version by modelID"
-      operationId: "get_version_by_id"
+      operationId: "get_model_by_id"
       produces:
       - "application/json"
       parameters:
@@ -570,23 +570,23 @@ paths:
         type: "integer"
       responses:
         200:
-          description: "Version successfully retrieved"
+          description: "Model successfully retrieved"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/version"
+              $ref: "#/definitions/model"
         400:
-          description: "Version retrieval error"
+          description: "Model retrieval error"
           schema:
             $ref: "#/definitions/request_info"
         404:
-          description: "Version does not exist"
-      x-swagger-router-controller: "swagger_server.controllers.version_controller"
+          description: "Model does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.models_controller"
     put:
       tags:
-      - "Version"
-      summary: "Update a Version"
-      operationId: "update_version"
+      - "Models"
+      summary: "Update a Model"
+      operationId: "update_model"
       produces:
       - "application/json"
       parameters:
@@ -596,62 +596,329 @@ paths:
         required: true
         type: "integer"
       - in: "body"
-        name: "Version"
-        description: "Updated Version"
+        name: "Model"
+        description: "Updated Model"
         required: true
         schema:
-          $ref: "#/definitions/version"
+          $ref: "#/definitions/model"
       responses:
         200:
-          description: "Version successfully updated"
+          description: "Model successfully updated"
         400:
-          description: "Version update error"
+          description: "Model update error"
           schema:
             $ref: "#/definitions/request_info"
         404:
-          description: "Version does not exist"
-      x-swagger-router-controller: "swagger_server.controllers.version_controller"
+          description: "Model does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.models_controller"
     delete:
       tags:
-      - "Version"
-      summary: "Delete a Version"
-      operationId: "delete_version"
+      - "Models"
+      summary: "Delete a Model"
+      operationId: "delete_model"
       parameters:
       - name: "modelID"
         in: "path"
-        description: "ID of model"
+        description: "ID of Model"
         required: true
         type: "integer"
       responses:
         200:
-          description: "Version successfully deleted"
+          description: "Model successfully deleted"
         400:
-          description: "Version delete error"
+          description: "Model delete error"
           schema:
             $ref: "#/definitions/request_info"
         404:
-          description: "Version does not exist"
-      x-swagger-router-controller: "swagger_server.controllers.version_controller"
+          description: "Model does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.models_controller"
+  /rules:
+    get:
+      tags:
+      - "Rules"
+      summary: "Get all Rules"
+      operationId: "get_rules"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Rules successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/rule"
+        400:
+          description: "Rules retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.rules_controller"
+  /rule:
+    post:
+      tags:
+      - "Rules"
+      summary: "Add a Rule"
+      operationId: "add_rule"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Rule"
+        description: "Rule to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/rule"
+      responses:
+        201:
+          description: "Rule successfully added"
+        400:
+          description: "Rule add error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.rules_controller"
+  /rule/{ruleID}:
+    get:
+      tags:
+      - "Rules"
+      summary: "Get a Rule by ruleID"
+      operationId: "get_rule_by_id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "ruleID"
+        in: "path"
+        description: "ID of Rule"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Rule successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/rule"
+        400:
+          description: "Rule retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Rule does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.rules_controller"
+    put:
+      tags:
+      - "Rules"
+      summary: "Update a Rule"
+      operationId: "update_rule"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "ruleID"
+        in: "path"
+        description: "ID of Rule"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "Rule"
+        description: "Updated Rule"
+        required: true
+        schema:
+          $ref: "#/definitions/rule"
+      responses:
+        200:
+          description: "Rule successfully updated"
+        400:
+          description: "Rule update error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Rule does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.rules_controller"
+    delete:
+      tags:
+      - "Rules"
+      summary: "Delete a Rule"
+      operationId: "delete_rule"
+      parameters:
+      - name: "ruleID"
+        in: "path"
+        description: "ID of Rule"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Rule successfully deleted"
+        400:
+          description: "Rule delete error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Rule does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.rules_controller"
+  /modelReviews:
+    get:
+      tags:
+      - "Model Reviews"
+      summary: "Get all Model Reviews"
+      operationId: "get_model_reviews"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Model Reviews successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/model_review"
+        400:
+          description: "Model Reviews retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.model_reviews_controller"
+  /modelReview:
+    post:
+      tags:
+      - "Model Reviews"
+      summary: "Add a Model Review"
+      operationId: "add_model_review"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "model_review"
+        description: "Model Review to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/model_review"
+      responses:
+        201:
+          description: "Model Review successfully added"
+        400:
+          description: "Model Review add error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.model_reviews_controller"
+  /modelReview/{sentenceID}:
+    get:
+      tags:
+      - "Model Reviews"
+      summary: "Get a Rule by sentenceID"
+      operationId: "get_model_review_by_id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sentenceID"
+        in: "path"
+        description: "sentence ID of review"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Model Review successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/model_review"
+        400:
+          description: "Model Review retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Model Review does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.model_reviews_controller"
+    put:
+      tags:
+      - "Model Reviews"
+      summary: "Update a Model Review"
+      operationId: "update_model_review"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sentenceID"
+        in: "path"
+        description: "sentence ID of review"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "Model_Review"
+        description: "Updated Rule"
+        required: true
+        schema:
+          $ref: "#/definitions/rule"
+      responses:
+        200:
+          description: "Model Review successfully updated"
+        400:
+          description: "Model Review update error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Model Review does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.model_reviews_controller"
+    delete:
+      tags:
+      - "Model Reviews"
+      summary: "Delete a Model Review"
+      operationId: "delete_model_review"
+      parameters:
+      - name: "sentenceID"
+        in: "path"
+        description: "sentence ID of review"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Model Review successfully deleted"
+        400:
+          description: "Model Review delete error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Model Review does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.model_reviews_controller"
+  /search:
+    get:
+      tags:
+      - "Utils"
+      summary: "Runs a given SELECT Query"
+      operationId: "get_search_results"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Search Results successfully retrieved"
+          schema:
+            $ref: "#/definitions/query"
+        400:
+          description: "Search Results retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.utils_controller"
 definitions:
-  version:
+  model:
     required:
     - "balAccuracy"
     - "dateAdded"
     - "location"
-    - "ruleNum"
+    - "modelVersion"
     properties:
       modelID:
         type: "integer"
         example: 1
         description: "Unique ID of the model"
-      balAccuracy:
-        type: "number"
-        example: 99.0
-        description: "Percentage Accuracy of the model"
-      ruleNum:
+      modelVersion:
         type: "integer"
         example: 1
-        description: "Rule model coincides with"
+        description: "Version of the model"
+      balAccuracy:
+        type: "number"
+        example: 99
+        description: "Percentage Accuracy of the model"
       location:
         type: "string"
         example: "/home/user/models"
@@ -679,7 +946,6 @@ definitions:
     description: "Information about the results of the request to the server"
   reviewer:
     required:
-    - "admin"
     - "emailAddress"
     - "firstName"
     - "lastName"
@@ -716,60 +982,45 @@ definitions:
       reviewerID: 1
       admin: false
       reputation: 93
-  review:
+  people_review:
     required:
-    - "rule1"
-    - "rule2"
-    - "rule3"
-    - "rule4"
-    - "rule5"
-    - "sentenceID"
+    - "dateAdded"
+    - "reviewerID"
+    - "ruleReview"
+    - "ruleReviewID"
     properties:
-      reviewerID:
-        type: "integer"
-        example: 1
-        description: "Unique ID of the review"
       sentenceID:
         type: "integer"
         example: 1
         description: "Unique ID of the sentence that was submitted for review"
-      rule1:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
-      rule2:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
-      rule3:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
-      rule4:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
-      rule5:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
+      reviewerID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the review"
+      ruleReviewID:
+        type: "integer"
+        example: 1
+        description: "ID of the rule that is reviewed"
+      ruleReview:
+        type: "integer"
+        example: 1
+        description: "Grade given by reviewer to the sentence, 1 for correct, 0 for\
+          \ incorect"
+      dateAdded:
+        type: "string"
+        example: "2019-09-24 22:33:19.000"
+        description: "Date added to the database"
     example:
-      reviewerID: 1
-      rule5: false
-      rule4: false
-      rule1: false
       sentenceID: 1
-      rule3: false
-      rule2: false
+      reviewerID: 1
+      ruleReviewID: 1
+      ruleReview: 1
+      dateAdded: "2019-09-24 22:33:19.000"
   sentence:
     required:
     - "dateAdded"
-    - "rule1"
-    - "rule2"
-    - "rule3"
-    - "rule4"
-    - "rule5"
     - "sentence"
+    - "taggedRuleID"
     - "userID"
     properties:
       sentenceID:
@@ -780,53 +1031,31 @@ definitions:
         type: "integer"
         example: 1
         description: "Unique ID of the user who submitted the sentence"
+      taggedRuleID:
+        type: "integer"
+        example: 1
+        description: "the rule tagged for review by the user"
       sentence:
         type: "string"
         example: "This is a sentence."
         description: "The user submitted sentence to be reviewed"
-      rule1:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
-      rule2:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
-      rule3:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
-      rule4:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
-      rule5:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
       dateAdded:
         type: "string"
         example: "2019-09-24 22:33:19.000"
         description: "Date added to the database"
     example:
       sentence: "This is a sentence."
-      rule5: false
-      rule4: false
-      rule1: false
       sentenceID: 1
-      rule3: false
-      rule2: false
+      taggedRuleID: 1
       userID: 1
       dateAdded: "2019-09-24 22:33:19.000"
-  datapoint:
+  dataEntry:
     required:
     - "dateAdded"
-    - "rule1"
-    - "rule2"
-    - "rule3"
-    - "rule4"
-    - "rule5"
+    - "ruleCorrect"
+    - "ruleCorrectID"
     - "sentence"
+    - "sentenceID"
     properties:
       sentenceID:
         type: "integer"
@@ -836,26 +1065,15 @@ definitions:
         type: "string"
         example: "This is a sentence."
         description: "The user submitted sentence to be reviewed"
-      rule1:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
-      rule2:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
-      rule3:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
-      rule4:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
-      rule5:
-        type: "boolean"
-        example: false
-        description: "Denotes wether this rule was broken by the sentence"
+      ruleCorrectID:
+        type: "integer"
+        example: 1
+        description: "the ID of the rule that graded"
+      ruleCorrect:
+        type: "integer"
+        example: 1
+        description: "the consensus on the correctness of the senetence for the rule;\
+          \ 1 = correct; 0 = incorrect"
       dateAdded:
         type: "string"
         example: "2019-09-24 22:33:19.000"
@@ -863,9 +1081,73 @@ definitions:
     example:
       sentenceID: 1
       sentence: "This is a sentence."
-      rule5: false
-      rule4: false
-      rule1: false
-      rule3: false
-      rule2: false
+      ruleCorrectID: 1
+      ruleCorrect: 1
       dateAdded: "2019-09-24 22:33:19.000"
+  rule:
+    required:
+    - "description"
+    - "priority"
+    - "ruleName"
+    properties:
+      ruleID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the rule"
+      ruleName:
+        type: "string"
+        example: "subject rule"
+        description: "name of rule"
+      description:
+        type: "string"
+        example: "issues with the subject of the sentence"
+        description: "description of rule"
+      priority:
+        type: "integer"
+        example: 1
+        description: "the current value it has towards the dataset, used to get more\
+          \ of a ceartin rule"
+    example:
+      ruleID: 1
+      ruleName: "subject rule"
+      priority: 0
+      description: "issues with the subject of the sentence"
+  model_review:
+    required:
+    - "modelID"
+    - "modelVersion"
+    - "ruleID"
+    - "sentenceID"
+    properties:
+      sentenceID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the sentence that was submitted for review"
+      ruleID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the rule"
+      modelID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the model"
+      modelVersion:
+        type: "integer"
+        example: 1
+        description: "Version of the model"
+    example:
+      modelID: 1
+      modelVersion: 1
+      sentenceID: 1
+      ruleID: 1
+  query:
+    required:
+    - "query"
+    properties:
+      query:
+        type: "string"
+        example: "SELECT * FROM TABLE;"
+        description: "A select query to be run on the db. Nothing except for SELECT\
+          \ queries will be run"
+    example:
+      query: "SELECT * FROM TABLE;"
