@@ -6,70 +6,70 @@ from flask import json
 from six import BytesIO
 
 from swagger_server.models.request_info import RequestInfo  # noqa: E501
-from swagger_server.models.version import Version  # noqa: E501
+from swagger_server.models.rule import Rule  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
-class TestVersionController(BaseTestCase):
-    """VersionController integration test stubs"""
+class TestRulesController(BaseTestCase):
+    """RulesController integration test stubs"""
 
-    def test_add_version(self):
-        """Test case for add_version
+    def test_add_rule(self):
+        """Test case for add_rule
 
-        Add a Version
+        Add a Rule
         """
-        Version = Version()
+        Rule = Rule()
         response = self.client.open(
-            '/api/v1/version',
+            '/api/v1/rule',
             method='POST',
-            data=json.dumps(Version),
+            data=json.dumps(Rule),
             content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_delete_version(self):
-        """Test case for delete_version
+    def test_delete_rule(self):
+        """Test case for delete_rule
 
-        Delete a Version
+        Delete a Rule
         """
         response = self.client.open(
-            '/api/v1/version/{modelID}'.format(modelID=56),
+            '/api/v1/rule/{ruleID}'.format(ruleID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_get_version_by_id(self):
-        """Test case for get_version_by_id
+    def test_get_rule_by_id(self):
+        """Test case for get_rule_by_id
 
-        Get a model version by modelID
+        Get a Rule by ruleID
         """
         response = self.client.open(
-            '/api/v1/version/{modelID}'.format(modelID=56),
+            '/api/v1/rule/{ruleID}'.format(ruleID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_get_versions(self):
-        """Test case for get_versions
+    def test_get_rules(self):
+        """Test case for get_rules
 
-        Get all Versions
+        Get all Rules
         """
         response = self.client.open(
-            '/api/v1/versions',
+            '/api/v1/rules',
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_update_version(self):
-        """Test case for update_version
+    def test_update_rule(self):
+        """Test case for update_rule
 
-        Update a Version
+        Update a Rule
         """
-        Version = Version()
+        Rule = Rule()
         response = self.client.open(
-            '/api/v1/version/{modelID}'.format(modelID=56),
+            '/api/v1/rule/{ruleID}'.format(ruleID=56),
             method='PUT',
-            data=json.dumps(Version),
+            data=json.dumps(Rule),
             content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

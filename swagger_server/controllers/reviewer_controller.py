@@ -6,18 +6,18 @@ from swagger_server.models.reviewer import Reviewer  # noqa: E501
 from swagger_server import util
 
 
-def add_reviewer(survey):  # noqa: E501
+def add_reviewer(reviewer):  # noqa: E501
     """Add a Reviewer
 
      # noqa: E501
 
-    :param survey: Reviewer to be added
-    :type survey: dict | bytes
+    :param reviewer: Reviewer to be added
+    :type reviewer: dict | bytes
 
     :rtype: None
     """
     if connexion.request.is_json:
-        survey = Reviewer.from_dict(connexion.request.get_json())  # noqa: E501
+        reviewer = Reviewer.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 
@@ -58,18 +58,18 @@ def get_reviewers():  # noqa: E501
     return 'do some magic!'
 
 
-def update_reviewer(reviewerID, survey):  # noqa: E501
+def update_reviewer(reviewerID, reviewer):  # noqa: E501
     """Update a Reviewer
 
      # noqa: E501
 
     :param reviewerID: ID of Reviewer
     :type reviewerID: int
-    :param survey: New Version of the Reviewer
-    :type survey: dict | bytes
+    :param reviewer: New Version of the Reviewer
+    :type reviewer: dict | bytes
 
     :rtype: None
     """
     if connexion.request.is_json:
-        survey = Reviewer.from_dict(connexion.request.get_json())  # noqa: E501
+        reviewer = Reviewer.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'

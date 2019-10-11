@@ -185,8 +185,6 @@ class Reviewer(Model):
         :param admin: The admin of this Reviewer.
         :type admin: bool
         """
-        if admin is None:
-            raise ValueError("Invalid value for `admin`, must not be `None`")  # noqa: E501
 
         self._admin = admin
 

@@ -5,71 +5,71 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
-from swagger_server.models.datapoint import Datapoint  # noqa: E501
+from swagger_server.models.data_entry import DataEntry  # noqa: E501
 from swagger_server.models.request_info import RequestInfo  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
-class TestDatasetController(BaseTestCase):
-    """DatasetController integration test stubs"""
+class TestTrainingDatasetController(BaseTestCase):
+    """TrainingDatasetController integration test stubs"""
 
-    def test_add_datapoint(self):
-        """Test case for add_datapoint
+    def test_add_data_entry(self):
+        """Test case for add_data_entry
 
-        Add a Datapoint
+        Add a Data Entry
         """
-        Datapoint = Datapoint()
+        dataEntry = DataEntry()
         response = self.client.open(
-            '/api/v1/Dataset',
+            '/api/v1/TrainingDataset',
             method='POST',
-            data=json.dumps(Datapoint),
+            data=json.dumps(dataEntry),
             content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_delete_datapoint(self):
-        """Test case for delete_datapoint
+    def test_delete_data_entry(self):
+        """Test case for delete_data_entry
 
-        Delete a Datapoint
+        Delete a Data Entry
         """
         response = self.client.open(
-            '/api/v1/data/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/TrainingDataset/{ID}'.format(ID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_get_datapoint_by_id(self):
-        """Test case for get_datapoint_by_id
+    def test_get_data_entry_by_id(self):
+        """Test case for get_data_entry_by_id
 
-        Get a datapoint by sentence ID
+        Get a Data Entry by ID
         """
         response = self.client.open(
-            '/api/v1/data/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/TrainingDataset/{ID}'.format(ID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_get_datapoints(self):
-        """Test case for get_datapoints
+    def test_get_data_entrys(self):
+        """Test case for get_data_entrys
 
-        Get all Datapoints
+        Get all Data Entries
         """
         response = self.client.open(
-            '/api/v1/Dataset',
+            '/api/v1/TrainingDataset',
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_update_datapoint(self):
-        """Test case for update_datapoint
+    def test_update_data_entry(self):
+        """Test case for update_data_entry
 
-        Update a Datapoint
+        Update a Data Entry
         """
-        Datapoint = Datapoint()
+        dataEntry = DataEntry()
         response = self.client.open(
-            '/api/v1/data/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/TrainingDataset/{ID}'.format(ID=56),
             method='PUT',
-            data=json.dumps(Datapoint),
+            data=json.dumps(dataEntry),
             content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
