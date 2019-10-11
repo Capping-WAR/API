@@ -25,11 +25,14 @@ class ORM:
         }
 
         self.tables = {
-            'versions': 'modelID',
-            'dataset': 'sentenceID',
+            'TrainingDataset': 'sentenceID',
+            'Rules':'ruleID',
+            'Models':'modelID',
+            'reviewers': 'reviewerID',
+            'SentenceRules':'sentenceID',
             'sentences': 'sentenceID',
-            'reviews': 'reviewID',
-            'reviewers': 'reviewerID'
+            'PeopleReviews': 'sentenceID',
+            'ModelReviews':'sentenceID',
         }
 
         # create a connection, get a conn and a cursor back

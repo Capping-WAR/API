@@ -21,26 +21,26 @@ def add_people_review(people_review):  # noqa: E501
     return 'do some magic!'
 
 
-def delete_people_review(peopleReviewID):  # noqa: E501
+def delete_people_review(sentenceID):  # noqa: E501
     """Delete a People Review
 
      # noqa: E501
 
-    :param peopleReviewID: ID of People Review
-    :type peopleReviewID: int
+    :param sentenceID: ID of sentence
+    :type sentenceID: int
 
     :rtype: None
     """
     return 'do some magic!'
 
 
-def get_people_review_by_id(peopleReviewID):  # noqa: E501
+def get_people_review_by_id(sentenceID):  # noqa: E501
     """Get a People Review by ID
 
      # noqa: E501
 
-    :param peopleReviewID: ID of People Review
-    :type peopleReviewID: int
+    :param sentenceID: ID of Sentence
+    :type sentenceID: int
 
     :rtype: List[PeopleReview]
     """
@@ -58,13 +58,13 @@ def get_people_reviews():  # noqa: E501
     return 'do some magic!'
 
 
-def update_people_review(peopleReviewID, people_review):  # noqa: E501
+def update_people_review(sentenceID, people_review):  # noqa: E501
     """Update a People Review
 
      # noqa: E501
 
-    :param peopleReviewID: ID of People Review
-    :type peopleReviewID: int
+    :param sentenceID: ID of sentence
+    :type sentenceID: int
     :param people_review: New Version of the People Review
     :type people_review: dict | bytes
 

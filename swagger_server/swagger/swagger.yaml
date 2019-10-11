@@ -183,7 +183,7 @@ paths:
           schema:
             $ref: "#/definitions/request_info"
       x-swagger-router-controller: "swagger_server.controllers.people_review_controller"
-  /review/{peopleReviewID}:
+  /review/{sentenceID}:
     get:
       tags:
       - "People Review"
@@ -192,9 +192,9 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "peopleReviewID"
+      - name: "sentenceID"
         in: "path"
-        description: "ID of People Review"
+        description: "ID of Sentence"
         required: true
         type: "integer"
       responses:
@@ -219,9 +219,9 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "peopleReviewID"
+      - name: "sentenceID"
         in: "path"
-        description: "ID of People Review"
+        description: "ID of sentence"
         required: true
         type: "integer"
       - in: "body"
@@ -246,9 +246,9 @@ paths:
       summary: "Delete a People Review"
       operationId: "delete_people_review"
       parameters:
-      - name: "peopleReviewID"
+      - name: "sentenceID"
         in: "path"
-        description: "ID of People Review"
+        description: "ID of sentence"
         required: true
         type: "integer"
       responses:
@@ -388,7 +388,7 @@ paths:
   /TrainingDataset:
     get:
       tags:
-      - "TrainingDataset"
+      - "Training Dataset"
       summary: "Get all Data Entries"
       operationId: "get_data_entrys"
       produces:
@@ -408,7 +408,7 @@ paths:
       x-swagger-router-controller: "swagger_server.controllers.training_dataset_controller"
     post:
       tags:
-      - "TrainingDataset"
+      - "Training Dataset"
       summary: "Add a Data Entry"
       operationId: "add_data_entry"
       consumes:
@@ -433,7 +433,7 @@ paths:
   /TrainingDataset/{ID}:
     get:
       tags:
-      - "TrainingDataset"
+      - "Training Dataset"
       summary: "Get a Data Entry by ID"
       operationId: "get_data_entry_by_id"
       produces:
@@ -460,7 +460,7 @@ paths:
       x-swagger-router-controller: "swagger_server.controllers.training_dataset_controller"
     put:
       tags:
-      - "TrainingDataset"
+      - "Training Dataset"
       summary: "Update a Data Entry"
       operationId: "update_data_entry"
       produces:
@@ -489,7 +489,7 @@ paths:
       x-swagger-router-controller: "swagger_server.controllers.training_dataset_controller"
     delete:
       tags:
-      - "TrainingDataset"
+      - "Training Dataset"
       summary: "Delete a Data Entry"
       operationId: "delete_data_entry"
       parameters:
