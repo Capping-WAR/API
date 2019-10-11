@@ -12,3 +12,4 @@ from swagger_server.models.request_info import RequestInfo
 from swagger_server.models.reviewer import Reviewer
 from swagger_server.models.rule import Rule
 from swagger_server.models.sentence import Sentence
+from swagger_server.models.sentence_rule import SentenceRule

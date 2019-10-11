@@ -15,15 +15,13 @@ class Sentence(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, sentence_id: int=None, user_id: int=None, tagged_rule_id: int=None, sentence: str=None, date_added: str=None):  # noqa: E501
+    def __init__(self, sentence_id: int=None, user_id: int=None, sentence: str=None, date_added: str=None):  # noqa: E501
         """Sentence - a model defined in Swagger
 
         :param sentence_id: The sentence_id of this Sentence.  # noqa: E501
         :type sentence_id: int
         :param user_id: The user_id of this Sentence.  # noqa: E501
         :type user_id: int
-        :param tagged_rule_id: The tagged_rule_id of this Sentence.  # noqa: E501
-        :type tagged_rule_id: int
         :param sentence: The sentence of this Sentence.  # noqa: E501
         :type sentence: str
         :param date_added: The date_added of this Sentence.  # noqa: E501
@@ -32,7 +30,6 @@ class Sentence(Model):
         self.swagger_types = {
             'sentence_id': int,
             'user_id': int,
-            'tagged_rule_id': int,
             'sentence': str,
             'date_added': str
         }
@@ -40,14 +37,12 @@ class Sentence(Model):
         self.attribute_map = {
             'sentence_id': 'sentenceID',
             'user_id': 'userID',
-            'tagged_rule_id': 'taggedRuleID',
             'sentence': 'sentence',
             'date_added': 'dateAdded'
         }
 
         self._sentence_id = sentence_id
         self._user_id = user_id
-        self._tagged_rule_id = tagged_rule_id
         self._sentence = sentence
         self._date_added = date_added
 
@@ -109,31 +104,6 @@ class Sentence(Model):
             raise ValueError("Invalid value for `user_id`, must not be `None`")  # noqa: E501
 
         self._user_id = user_id
-
-    @property
-    def tagged_rule_id(self) -> int:
-        """Gets the tagged_rule_id of this Sentence.
-
-        the rule tagged for review by the user  # noqa: E501
-
-        :return: The tagged_rule_id of this Sentence.
-        :rtype: int
-        """
-        return self._tagged_rule_id
-
-    @tagged_rule_id.setter
-    def tagged_rule_id(self, tagged_rule_id: int):
-        """Sets the tagged_rule_id of this Sentence.
-
-        the rule tagged for review by the user  # noqa: E501
-
-        :param tagged_rule_id: The tagged_rule_id of this Sentence.
-        :type tagged_rule_id: int
-        """
-        if tagged_rule_id is None:
-            raise ValueError("Invalid value for `tagged_rule_id`, must not be `None`")  # noqa: E501
-
-        self._tagged_rule_id = tagged_rule_id
 
     @property
     def sentence(self) -> str:
