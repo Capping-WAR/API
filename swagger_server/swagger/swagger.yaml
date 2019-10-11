@@ -880,6 +880,130 @@ paths:
         404:
           description: "Model Review does not exist"
       x-swagger-router-controller: "swagger_server.controllers.model_reviews_controller"
+  /sentenceRules:
+    get:
+      tags:
+      - "Sentence Rules"
+      summary: "Get all Sentence Rules"
+      operationId: "get_sentence_rules"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Sentence Rules successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/sentence_rule"
+        400:
+          description: "Sentence Rules retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.sentence_rules_controller"
+  /sentenceRule:
+    post:
+      tags:
+      - "Sentence Rules"
+      summary: "Add a Sentence Rule"
+      operationId: "add_sentence_rule"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "sentence_rule"
+        description: "Sentence Rule to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/sentence_rule"
+      responses:
+        201:
+          description: "Sentence Rule successfully added"
+        400:
+          description: "Sentence Rule add error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.sentence_rules_controller"
+  /sentenceRule/{sentenceID}:
+    get:
+      tags:
+      - "Sentence Rules"
+      summary: "Get a Sentence Rule by sentenceID"
+      operationId: "get_sentence_rule_by_id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sentenceID"
+        in: "path"
+        description: "sentence ID of Sentence Rule"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Sentence Rule successfully retrieved"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/sentence_rule"
+        400:
+          description: "Sentence Rule retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Sentence Rule does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.sentence_rules_controller"
+    put:
+      tags:
+      - "Sentence Rules"
+      summary: "Update a Sentence Rule"
+      operationId: "update_sentence_rule"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sentenceID"
+        in: "path"
+        description: "sentence ID of Sentence Rule"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "sentence_rule"
+        description: "Updated Sentence Rule"
+        required: true
+        schema:
+          $ref: "#/definitions/sentence_rule"
+      responses:
+        200:
+          description: "Sentence Rule successfully updated"
+        400:
+          description: "Sentence Rule update error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Sentence Rule does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.sentence_rules_controller"
+    delete:
+      tags:
+      - "Sentence Rules"
+      summary: "Delete a Sentence Rule"
+      operationId: "delete_sentence_rule"
+      parameters:
+      - name: "sentenceID"
+        in: "path"
+        description: "sentence ID of Sentence Rule"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Sentence Rule successfully deleted"
+        400:
+          description: "Sentence Rule delete error"
+          schema:
+            $ref: "#/definitions/request_info"
+        404:
+          description: "Sentence Rule does not exist"
+      x-swagger-router-controller: "swagger_server.controllers.sentence_rules_controller"
   /search:
     get:
       tags:
@@ -888,12 +1012,19 @@ paths:
       operationId: "get_search_results"
       produces:
       - "application/json"
-      parameters: []
+      parameters:
+      - in: "body"
+        name: "query"
+        description: "Query to be run"
+        required: true
+        schema:
+          $ref: "#/definitions/query"
       responses:
         200:
           description: "Search Results successfully retrieved"
           schema:
-            $ref: "#/definitions/query"
+            type: "array"
+            items: {}
         400:
           description: "Search Results retrieval error"
           schema:
@@ -1020,7 +1151,6 @@ definitions:
     required:
     - "dateAdded"
     - "sentence"
-    - "taggedRuleID"
     - "userID"
     properties:
       sentenceID:
@@ -1031,10 +1161,6 @@ definitions:
         type: "integer"
         example: 1
         description: "Unique ID of the user who submitted the sentence"
-      taggedRuleID:
-        type: "integer"
-        example: 1
-        description: "the rule tagged for review by the user"
       sentence:
         type: "string"
         example: "This is a sentence."
@@ -1140,6 +1266,26 @@ definitions:
       modelVersion: 1
       sentenceID: 1
       ruleID: 1
+  sentence_rule:
+    required:
+    - "status"
+    properties:
+      sentenceID:
+        type: "integer"
+        example: 1
+        description: "Unique ID of the sentence that was submitted for review"
+      taggedRuleID:
+        type: "integer"
+        example: 1
+        description: "the rule tagged for review by the user"
+      status:
+        type: "string"
+        example: "pending"
+        description: "the current status of the sentence in its review process"
+    example:
+      taggedRuleID: 1
+      sentenceID: 1
+      status: "pending"
   query:
     required:
     - "query"
@@ -1149,5 +1295,3 @@ definitions:
         example: "SELECT * FROM TABLE;"
         description: "A select query to be run on the db. Nothing except for SELECT\
           \ queries will be run"
-    example:
-      query: "SELECT * FROM TABLE;"

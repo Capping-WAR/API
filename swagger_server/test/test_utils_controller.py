@@ -18,9 +18,12 @@ class TestUtilsController(BaseTestCase):
 
         Runs a given SELECT Query
         """
+        query = Query()
         response = self.client.open(
             '/api/v1/search',
-            method='GET')
+            method='GET',
+            data=json.dumps(query),
+            content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
