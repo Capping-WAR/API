@@ -68,6 +68,7 @@ class ORM:
         """
         try:
             conn = psycopg2.connect(**conn_info)
+            conn.autocommit=True
             cur = conn.cursor()
             return conn, cur
         except:
@@ -104,6 +105,22 @@ class ORM:
         except Exception as err:
             return err
 
+    def _join(self, values:list) -> str:
+        out = ''
+        for dex, val in enumerate(values):
+            if (type(val) is not int 
+            and type(val) is not float):
+                val = f"'{val}'"
+            else:
+                val = str(val)
+
+            if dex < len(values)-1:
+                val += ','
+
+            out += val
+
+        return out
+
     """ Base Operations """
 
     def get(self, table:str, cols:str=None, 
@@ -130,23 +147,17 @@ class ORM:
         """
 
         sql = 'SELECT'
-        # if table.lower() not in self.tables.keys():
-        #     return Exception(
-        #         f'Invalid Table: {table}. '
-        #         + f'Must be one of: {self.tables.keys()}'
-        #     )
-        
+
         if cols is not None:
             sql += cols
         else:
-            sql += '*'
+            sql += ' *'
 
-        sql += f"FROM {table}"
+        sql += f' FROM {table}'
 
         if clause is not None:
             sql += f' {clause}'
         
-
         return self._query(f'{sql};')
 
     def insert(self, table:str, values:list, 
@@ -174,10 +185,11 @@ class ORM:
         sql = f'INSERT INTO {table}'
 
         if cols is not None:
-            sql += f' ({cols})'
+            sql += f'({cols})'
         
-        sql += f" VALUES ({','.join(values)})"
+        sql += f" VALUES ({self._join(values)})"
 
+        print(sql)
         return self._query(f'{sql};')
 
     def update(self, table:str, values:dict,
@@ -206,14 +218,21 @@ class ORM:
         sql = f'UPDATE {table} SET'
         last_col = sorted(values.keys())[-1]
         for col, val in values.items():
+            if (type(val) is not int 
+                and type(val) is not float):
+                    val = f"'{val}'"
+            else:
+                val = str(val)
+                
             if col == last_col:
                 sql += f' {col}={val}'
             else:
+                
                 sql += f' {col}={val},'
             
         if clause is not None:
             sql += f' {clause}'
-
+        print(sql)
         return self._query(f'{sql};')
 
     
