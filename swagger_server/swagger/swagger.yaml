@@ -845,10 +845,10 @@ paths:
         type: "integer"
       - in: "body"
         name: "Model_Review"
-        description: "Updated Rule"
+        description: "Updated Model Review"
         required: true
         schema:
-          $ref: "#/definitions/rule"
+          $ref: "#/definitions/model_review"
       responses:
         200:
           description: "Model Review successfully updated"

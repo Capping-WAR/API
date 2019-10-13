@@ -5,6 +5,7 @@ from swagger_server.models.request_info import RequestInfo  # noqa: E501
 from swagger_server.models.sentence import Sentence  # noqa: E501
 from swagger_server import util
 
+from swagger_server.__globals__ import _globals
 
 def add_sentence(sentence):  # noqa: E501
     """Add a Sentence
@@ -17,8 +18,14 @@ def add_sentence(sentence):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        sentence = Sentence.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+        values = list(sentence.values())
+        cols = ','.join(list(sentence.keys()))
+        results =  _globals.orm.insert('sentences', values, cols=cols)
+        if type(results) != list:
+            results = str(results)
+            
+        return results
+
 
 
 def delete_sentence(sentenceID):  # noqa: E501

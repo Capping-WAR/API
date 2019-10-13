@@ -5,6 +5,7 @@ from swagger_server.models.request_info import RequestInfo  # noqa: E501
 from swagger_server.models.rule import Rule  # noqa: E501
 from swagger_server import util
 
+from swagger_server.__globals__ import _globals
 
 def add_rule(Rule):  # noqa: E501
     """Add a Rule
@@ -17,9 +18,13 @@ def add_rule(Rule):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        Rule = Rule.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
-
+            values = list(Rule.values())
+            cols = ','.join(list(Rule.keys()))
+            results =  _globals.orm.insert('Rules', values, cols=cols)
+            if type(results) != list:
+                results = str(results)
+                
+            return results
 
 def delete_rule(ruleID):  # noqa: E501
     """Delete a Rule
@@ -31,7 +36,13 @@ def delete_rule(ruleID):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    results = _globals.orm.delete(
+        'Rules', 
+        clause=f'WHERE ruleID={ruleID}'
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def get_rule_by_id(ruleID):  # noqa: E501
@@ -44,7 +55,13 @@ def get_rule_by_id(ruleID):  # noqa: E501
 
     :rtype: List[Rule]
     """
-    return 'do some magic!'
+    results = _globals.orm.get(
+        'Rules', 
+        clause=f'WHERE ruleID={ruleID}'
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def get_rules():  # noqa: E501
@@ -55,7 +72,12 @@ def get_rules():  # noqa: E501
 
     :rtype: List[Rule]
     """
-    return 'do some magic!'
+    results = _globals.orm.get(
+        'Rules', 
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def update_rule(ruleID, Rule):  # noqa: E501
@@ -71,5 +93,11 @@ def update_rule(ruleID, Rule):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        Rule = Rule.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+        results = _globals.orm.update(
+            'Rules',
+            Rule,
+            clause=f'WHERE ruleID={ruleID}'
+        ) 
+        if type(results) != list:
+            results = str(results)
+        return results
