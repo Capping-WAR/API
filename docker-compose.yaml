@@ -5,8 +5,10 @@ version: '2'
 services:
   api:
     build: .
+    restart:  unless-stopped
+    container_name: war-api
     env_file: .env
     ports:
       - "8080:8080"
-    volumes:
-      - "${PWD}:/server"
+    # volumes:
+    #   - "${PWD}:/server"
