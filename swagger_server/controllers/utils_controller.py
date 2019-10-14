@@ -5,6 +5,7 @@ from swagger_server.models.query import Query  # noqa: E501
 from swagger_server.models.request_info import RequestInfo  # noqa: E501
 from swagger_server import util
 
+from swagger_server.__globals__ import _globals
 
 def get_search_results(query):  # noqa: E501
     """Runs a given SELECT Query
@@ -16,6 +17,13 @@ def get_search_results(query):  # noqa: E501
 
     :rtype: List[object]
     """
-    if connexion.request.is_json:
-        query = Query.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    q = query['query']
+    if 'select' not in q.lower():
+        return {
+            'message':'query must be a select'
+        }
+    else:
+        results = _globals.orm._query(q) 
+        if type(results) != list:
+            results = str(results)
+        return results

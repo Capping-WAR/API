@@ -5,6 +5,8 @@ from swagger_server.models.model import Model  # noqa: E501
 from swagger_server.models.request_info import RequestInfo  # noqa: E501
 from swagger_server import util
 
+from swagger_server.__globals__ import _globals
+
 
 def add_model(Model):  # noqa: E501
     """Add a Model
@@ -17,8 +19,13 @@ def add_model(Model):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        Model = Model.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+        values = list(Model.values())
+        cols = ','.join(list(Model.keys()))
+        results =  _globals.orm.insert('Models', values, cols=cols)
+        if type(results) != list:
+            results = str(results)
+            
+        return results
 
 
 def delete_model(modelID):  # noqa: E501
@@ -31,7 +38,13 @@ def delete_model(modelID):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    results = _globals.orm.delete(
+        'Models', 
+        clause=f'WHERE modelID={modelID}'
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def get_model_by_id(modelID):  # noqa: E501
@@ -44,7 +57,13 @@ def get_model_by_id(modelID):  # noqa: E501
 
     :rtype: List[Model]
     """
-    return 'do some magic!'
+    results = _globals.orm.get(
+        'Models', 
+        clause=f'WHERE modelID={modelID}'
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def get_models():  # noqa: E501
@@ -55,7 +74,12 @@ def get_models():  # noqa: E501
 
     :rtype: List[Model]
     """
-    return 'do some magic!'
+    results = _globals.orm.get(
+        'Models', 
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def update_model(modelID, Model):  # noqa: E501
@@ -71,5 +95,11 @@ def update_model(modelID, Model):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        Model = Model.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+        results = _globals.orm.update(
+            'Models',
+            Model,
+            clause=f'WHERE modelID={modelID}'
+        ) 
+        if type(results) != list:
+            results = str(results)
+        return results

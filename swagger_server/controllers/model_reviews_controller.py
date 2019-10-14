@@ -6,6 +6,8 @@ from swagger_server.models.request_info import RequestInfo  # noqa: E501
 from swagger_server.models.rule import Rule  # noqa: E501
 from swagger_server import util
 
+from swagger_server.__globals__ import _globals
+
 
 def add_model_review(model_review):  # noqa: E501
     """Add a Model Review
@@ -18,8 +20,13 @@ def add_model_review(model_review):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        model_review = ModelReview.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+        values = list(Rule.values())
+        cols = ','.join(list(Rule.keys()))
+        results =  _globals.orm.insert('ModelReviews', values, cols=cols)
+        if type(results) != list:
+            results = str(results)
+            
+        return results
 
 
 def delete_model_review(sentenceID):  # noqa: E501
@@ -32,7 +39,13 @@ def delete_model_review(sentenceID):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    results = _globals.orm.delete(
+        'ModelReviews', 
+        clause=f'WHERE sentenceID={sentenceID}'
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def get_model_review_by_id(sentenceID):  # noqa: E501
@@ -45,7 +58,10 @@ def get_model_review_by_id(sentenceID):  # noqa: E501
 
     :rtype: List[ModelReview]
     """
-    return 'do some magic!'
+    return _globals.orm.get(
+        'ModelReviews', 
+        f'WHERE sentenceID={sentenceID}'
+    ) 
 
 
 def get_model_reviews():  # noqa: E501
@@ -56,7 +72,12 @@ def get_model_reviews():  # noqa: E501
 
     :rtype: List[ModelReview]
     """
-    return 'do some magic!'
+    results = _globals.orm.get(
+        'ModelReviews', 
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def update_model_review(sentenceID, Model_Review):  # noqa: E501
@@ -72,5 +93,11 @@ def update_model_review(sentenceID, Model_Review):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        Model_Review = Rule.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+        results = _globals.orm.update(
+            'ModelReviews',
+            Model_Review,
+            clause=f'WHERE sentenceID={sentenceID}'
+        ) 
+        if type(results) != list:
+            results = str(results)
+        return results

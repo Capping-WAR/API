@@ -33,7 +33,7 @@ class TestPeopleReviewController(BaseTestCase):
         Delete a People Review
         """
         response = self.client.open(
-            '/api/v1/review/{peopleReviewID}'.format(peopleReviewID=56),
+            '/api/v1/review/{sentenceID}'.format(sentenceID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -44,7 +44,7 @@ class TestPeopleReviewController(BaseTestCase):
         Get a People Review by ID
         """
         response = self.client.open(
-            '/api/v1/review/{peopleReviewID}'.format(peopleReviewID=56),
+            '/api/v1/review/{sentenceID}'.format(sentenceID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -67,7 +67,7 @@ class TestPeopleReviewController(BaseTestCase):
         """
         people_review = PeopleReview()
         response = self.client.open(
-            '/api/v1/review/{peopleReviewID}'.format(peopleReviewID=56),
+            '/api/v1/review/{sentenceID}'.format(sentenceID=56),
             method='PUT',
             data=json.dumps(people_review),
             content_type='application/json')

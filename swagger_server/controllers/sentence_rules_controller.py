@@ -5,6 +5,8 @@ from swagger_server.models.request_info import RequestInfo  # noqa: E501
 from swagger_server.models.sentence_rule import SentenceRule  # noqa: E501
 from swagger_server import util
 
+from swagger_server.__globals__ import _globals
+
 
 def add_sentence_rule(sentence_rule):  # noqa: E501
     """Add a Sentence Rule
@@ -17,8 +19,13 @@ def add_sentence_rule(sentence_rule):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        sentence_rule = SentenceRule.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+        values = list(sentence_rule.values())
+        cols = ','.join(list(sentence_rule.keys()))
+        results =  _globals.orm.insert('SentenceRules', values, cols=cols)
+        if type(results) != list:
+            results = str(results)
+            
+        return results
 
 
 def delete_sentence_rule(sentenceID):  # noqa: E501
@@ -31,7 +38,13 @@ def delete_sentence_rule(sentenceID):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    results = _globals.orm.delete(
+        'SentenceRules', 
+        clause=f'WHERE sentenceID={sentenceID}'
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def get_sentence_rule_by_id(sentenceID):  # noqa: E501
@@ -44,7 +57,13 @@ def get_sentence_rule_by_id(sentenceID):  # noqa: E501
 
     :rtype: List[SentenceRule]
     """
-    return 'do some magic!'
+    results = _globals.orm.get(
+        'SentenceRules', 
+        clause=f'WHERE sentenceID={sentenceID}'
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def get_sentence_rules():  # noqa: E501
@@ -55,7 +74,12 @@ def get_sentence_rules():  # noqa: E501
 
     :rtype: List[SentenceRule]
     """
-    return 'do some magic!'
+    results = _globals.orm.get(
+        'SentenceRules'
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def update_sentence_rule(sentenceID, sentence_rule):  # noqa: E501
@@ -71,5 +95,11 @@ def update_sentence_rule(sentenceID, sentence_rule):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        sentence_rule = SentenceRule.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+        results = _globals.orm.update(
+            'SentenceRules',
+            sentence_rule,
+            clause=f'WHERE sentenceID={sentenceID}'
+        ) 
+        if type(results) != list:
+            results = str(results)
+        return results
