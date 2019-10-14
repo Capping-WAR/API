@@ -18,13 +18,13 @@ def add_rule(Rule):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-            values = list(Rule.values())
-            cols = ','.join(list(Rule.keys()))
-            results =  _globals.orm.insert('Rules', values, cols=cols)
-            if type(results) != list:
-                results = str(results)
-                
-            return results
+        values = list(Rule.values())
+        cols = ','.join(list(Rule.keys()))
+        results =  _globals.orm.insert('Rules', values, cols=cols)
+        if type(results) != list:
+            results = str(results)
+            
+        return results
 
 def delete_rule(ruleID):  # noqa: E501
     """Delete a Rule

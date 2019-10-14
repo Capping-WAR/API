@@ -20,11 +20,12 @@ def add_model_review(model_review):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        values = list(model_review.values())
-        results = _globals.orm.insert('ModelReviews', values)
+        values = list(Rule.values())
+        cols = ','.join(list(Rule.keys()))
+        results =  _globals.orm.insert('ModelReviews', values, cols=cols)
         if type(results) != list:
             results = str(results)
-
+            
         return results
 
 
@@ -38,10 +39,13 @@ def delete_model_review(sentenceID):  # noqa: E501
 
     :rtype: None
     """
-    return _globals.orm.delete(
+    results = _globals.orm.delete(
         'ModelReviews', 
-        f'WHERE sentenceID={sentenceID}'
-    )
+        clause=f'WHERE sentenceID={sentenceID}'
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def get_model_review_by_id(sentenceID):  # noqa: E501
@@ -68,8 +72,12 @@ def get_model_reviews():  # noqa: E501
 
     :rtype: List[ModelReview]
     """
-
-    return _globals.orm.get('ModelReviews')
+    results = _globals.orm.get(
+        'ModelReviews', 
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def update_model_review(sentenceID, Model_Review):  # noqa: E501
@@ -85,9 +93,11 @@ def update_model_review(sentenceID, Model_Review):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        Model_Review = Rule.from_dict(connexion.request.get_json())  # noqa: E501
-    
-    return _globals.orm.update(
-        'ModelReviews',
-        Model_Review
-    ) 
+        results = _globals.orm.update(
+            'ModelReviews',
+            Model_Review,
+            clause=f'WHERE sentenceID={sentenceID}'
+        ) 
+        if type(results) != list:
+            results = str(results)
+        return results

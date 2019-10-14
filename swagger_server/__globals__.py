@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from swagger_server.orm import ORM
+from orm import ORM
 
 class Globals:
     def __init__(self):

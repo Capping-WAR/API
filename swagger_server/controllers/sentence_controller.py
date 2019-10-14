@@ -38,7 +38,13 @@ def delete_sentence(sentenceID):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    results = _globals.orm.delete(
+        'Sentences', 
+        clause=f'WHERE sentenceID={sentenceID}'
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def get_sentence_by_id(sentenceID):  # noqa: E501
@@ -51,7 +57,13 @@ def get_sentence_by_id(sentenceID):  # noqa: E501
 
     :rtype: List[Sentence]
     """
-    return 'do some magic!'
+    results = _globals.orm.get(
+        'Sentences', 
+        clause=f'WHERE sentenceID={sentenceID}'
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def get_sentences():  # noqa: E501
@@ -62,7 +74,12 @@ def get_sentences():  # noqa: E501
 
     :rtype: List[Sentence]
     """
-    return 'do some magic!'
+    results = _globals.orm.get(
+        'Sentences', 
+    ) 
+    if type(results) != list:
+        results = str(results)
+    return results
 
 
 def update_sentence(sentenceID, sentence):  # noqa: E501
@@ -78,5 +95,11 @@ def update_sentence(sentenceID, sentence):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        sentence = Sentence.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+        results = _globals.orm.update(
+            'Sentences',
+            sentence,
+            clause=f'WHERE sentenceID={sentenceID}'
+        ) 
+        if type(results) != list:
+            results = str(results)
+        return results
