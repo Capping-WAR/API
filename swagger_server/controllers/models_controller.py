@@ -63,7 +63,7 @@ def get_model_by_id(modelID):  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'Model':results}
 
 
 def get_models():  # noqa: E501
@@ -79,7 +79,7 @@ def get_models():  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'Models':results}
 
 
 def update_model(modelID, Model):  # noqa: E501

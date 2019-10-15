@@ -63,7 +63,7 @@ def get_sentence_rule_by_id(sentenceID):  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'SentenceRule':results}
 
 
 def get_sentence_rules():  # noqa: E501
@@ -79,7 +79,7 @@ def get_sentence_rules():  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'SentenceRules':results}
 
 
 def update_sentence_rule(sentenceID, sentence_rule):  # noqa: E501

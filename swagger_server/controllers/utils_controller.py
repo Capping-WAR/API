@@ -18,6 +18,11 @@ def get_search_results(query):  # noqa: E501
     :rtype: List[object]
     """
     q = query['query']
+    if 'from' in q.lower():
+        table = q.lower().split('from')[1]
+        table = table.split(';')[0]
+        table = table.split('where')[0]
+        table = table.strip()
     if 'select' not in q.lower():
         return {
             'message':'query must be a select'
@@ -26,4 +31,4 @@ def get_search_results(query):  # noqa: E501
         results = _globals.orm._query(q) 
         if type(results) != list:
             results = str(results)
-        return results
+        return {table:results}

@@ -61,7 +61,7 @@ def get_rule_by_id(ruleID):  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'Rule':results}
 
 
 def get_rules():  # noqa: E501
@@ -77,7 +77,7 @@ def get_rules():  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'Rules':results}
 
 
 def update_rule(ruleID, Rule):  # noqa: E501

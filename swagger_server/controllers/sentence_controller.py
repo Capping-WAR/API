@@ -63,7 +63,7 @@ def get_sentence_by_id(sentenceID):  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'Sentence':results}
 
 
 def get_sentences():  # noqa: E501
@@ -79,7 +79,7 @@ def get_sentences():  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'Sentences':results}
 
 
 def update_sentence(sentenceID, sentence):  # noqa: E501

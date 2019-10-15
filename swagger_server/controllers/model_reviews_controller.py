@@ -58,10 +58,13 @@ def get_model_review_by_id(sentenceID):  # noqa: E501
 
     :rtype: List[ModelReview]
     """
-    return _globals.orm.get(
+    results = _globals.orm.get(
         'ModelReviews', 
-        f'WHERE sentenceID={sentenceID}'
+        clause=f'WHERE sentenceID={sentenceID}'
     ) 
+    if type(results) != list:
+        results = str(results)
+    return {'ModelReview':results}
 
 
 def get_model_reviews():  # noqa: E501
@@ -77,7 +80,7 @@ def get_model_reviews():  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'ModelReviews':results}
 
 
 def update_model_review(sentenceID, Model_Review):  # noqa: E501

@@ -63,7 +63,7 @@ def get_people_review_by_id(sentenceID):  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'PeopleReview':results}
 
 
 def get_people_reviews():  # noqa: E501
@@ -79,7 +79,7 @@ def get_people_reviews():  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'PeopleReviews':results}
 
 
 def update_people_review(sentenceID, people_review):  # noqa: E501

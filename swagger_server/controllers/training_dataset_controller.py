@@ -62,7 +62,7 @@ def get_data_entry_by_id(sentenceID):  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'DataEntry':results}
 
 
 def get_data_entrys():  # noqa: E501
@@ -78,7 +78,7 @@ def get_data_entrys():  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'DataEntries':results}
 
 
 def update_data_entry(sentenceID, dataEntry):  # noqa: E501

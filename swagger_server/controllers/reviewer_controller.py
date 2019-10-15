@@ -62,7 +62,7 @@ def get_reviewer_by_id(reviewerID):  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'Reviewer':results}
 
 
 
@@ -79,7 +79,7 @@ def get_reviewers():  # noqa: E501
     ) 
     if type(results) != list:
         results = str(results)
-    return results
+    return {'Reviewers':results}
 
 
 def update_reviewer(reviewerID, reviewer):  # noqa: E501
