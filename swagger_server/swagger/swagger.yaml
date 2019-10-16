@@ -1005,7 +1005,7 @@ paths:
           description: "Sentence Rule does not exist"
       x-swagger-router-controller: "swagger_server.controllers.sentence_rules_controller"
   /search:
-    get:
+    post:
       tags:
       - "Utils"
       summary: "Runs a given SELECT Query"
