@@ -21,6 +21,8 @@ def get_search_results(query):  # noqa: E501
     if 'from' in q.lower():
         table = q.lower().split('from')[1]
         table = table.split(';')[0]
+        table = table.split(' ')[1]
+        table = table.split('(')[0]
         table = table.split('where')[0]
         table = table.strip()
     if 'select' not in q.lower():

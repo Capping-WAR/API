@@ -21,5 +21,5 @@ EXPOSE 8080
 
 WORKDIR /usr/src/app
 ENTRYPOINT ["python3"]
-
-CMD ["-m", "swagger_server"]
+CMD ["run.py"]
+# CMD ["-m", "swagger_server"]
