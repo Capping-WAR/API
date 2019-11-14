@@ -33,7 +33,7 @@ class TestRulesController(BaseTestCase):
         Delete a Rule
         """
         response = self.client.open(
-            '/api/v1/rule/{ruleID}'.format(ruleID=56),
+            '/api/v1/rule/{ruleID}'.fpgapiat(ruleID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -44,7 +44,7 @@ class TestRulesController(BaseTestCase):
         Get a Rule by ruleID
         """
         response = self.client.open(
-            '/api/v1/rule/{ruleID}'.format(ruleID=56),
+            '/api/v1/rule/{ruleID}'.fpgapiat(ruleID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -67,7 +67,7 @@ class TestRulesController(BaseTestCase):
         """
         Rule = Rule()
         response = self.client.open(
-            '/api/v1/rule/{ruleID}'.format(ruleID=56),
+            '/api/v1/rule/{ruleID}'.fpgapiat(ruleID=56),
             method='PUT',
             data=json.dumps(Rule),
             content_type='application/json')

@@ -20,7 +20,7 @@ def add_rule(Rule):  # noqa: E501
     if connexion.request.is_json:
         values = list(Rule.values())
         cols = ','.join(list(Rule.keys()))
-        results =  _globals.orm.insert('Rules', values, cols=cols)
+        results =  _globals.pgapi.insert('Rules', values, cols=cols)
         if type(results) != list:
             results = str(results)
             
@@ -36,7 +36,7 @@ def delete_rule(ruleID):  # noqa: E501
 
     :rtype: None
     """
-    results = _globals.orm.delete(
+    results = _globals.pgapi.delete(
         'Rules', 
         clause=f'WHERE ruleID={ruleID}'
     ) 
@@ -55,7 +55,7 @@ def get_rule_by_id(ruleID):  # noqa: E501
 
     :rtype: List[Rule]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'Rules', 
         clause=f'WHERE ruleID={ruleID}'
     ) 
@@ -72,7 +72,7 @@ def get_rules():  # noqa: E501
 
     :rtype: List[Rule]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'Rules', 
     ) 
     if type(results) != list:
@@ -93,7 +93,7 @@ def update_rule(ruleID, Rule):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        results = _globals.orm.update(
+        results = _globals.pgapi.update(
             'Rules',
             Rule,
             clause=f'WHERE ruleID={ruleID}'

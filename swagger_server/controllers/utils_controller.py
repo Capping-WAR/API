@@ -30,7 +30,7 @@ def get_search_results(query):  # noqa: E501
             'message':'query must be a select'
         }
     else:
-        results = _globals.orm._query(q) 
+        results = _globals.pgapi._query(q) 
         if type(results) != list:
             results = str(results)
         return {table:results}

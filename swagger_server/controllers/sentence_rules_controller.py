@@ -21,7 +21,7 @@ def add_sentence_rule(sentence_rule):  # noqa: E501
     if connexion.request.is_json:
         values = list(sentence_rule.values())
         cols = ','.join(list(sentence_rule.keys()))
-        results =  _globals.orm.insert('SentenceRules', values, cols=cols)
+        results =  _globals.pgapi.insert('SentenceRules', values, cols=cols)
         if type(results) != list:
             results = str(results)
             
@@ -38,7 +38,7 @@ def delete_sentence_rule(sentenceID):  # noqa: E501
 
     :rtype: None
     """
-    results = _globals.orm.delete(
+    results = _globals.pgapi.delete(
         'SentenceRules', 
         clause=f'WHERE sentenceID={sentenceID}'
     ) 
@@ -57,7 +57,7 @@ def get_sentence_rule_by_id(sentenceID):  # noqa: E501
 
     :rtype: List[SentenceRule]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'SentenceRules', 
         clause=f'WHERE sentenceID={sentenceID}'
     ) 
@@ -74,7 +74,7 @@ def get_sentence_rules():  # noqa: E501
 
     :rtype: List[SentenceRule]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'SentenceRules'
     ) 
     if type(results) != list:
@@ -95,7 +95,7 @@ def update_sentence_rule(sentenceID, sentence_rule):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        results = _globals.orm.update(
+        results = _globals.pgapi.update(
             'SentenceRules',
             sentence_rule,
             clause=f'WHERE sentenceID={sentenceID}'

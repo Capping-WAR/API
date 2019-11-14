@@ -20,7 +20,7 @@ def add_reviewer(reviewer):  # noqa: E501
     if connexion.request.is_json:
         values = list(reviewer.values())
         cols = ','.join(list(reviewer.keys()))
-        results =  _globals.orm.insert('Reviewers', values, cols=cols)
+        results =  _globals.pgapi.insert('Reviewers', values, cols=cols)
         if type(results) != list:
             results = str(results)
             
@@ -37,7 +37,7 @@ def delete_reviewer(reviewerID):  # noqa: E501
 
     :rtype: None
     """
-    results = _globals.orm.delete(
+    results = _globals.pgapi.delete(
         'Reviewers', 
         clause=f'WHERE reviewerID={reviewerID}'
     ) 
@@ -56,7 +56,7 @@ def get_reviewer_by_id(reviewerID):  # noqa: E501
 
     :rtype: List[Reviewer]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'Reviewers', 
         clause=f'WHERE reviewerID={reviewerID}'
     ) 
@@ -74,7 +74,7 @@ def get_reviewers():  # noqa: E501
 
     :rtype: List[Reviewer]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'Reviewers', 
     ) 
     if type(results) != list:
@@ -95,7 +95,7 @@ def update_reviewer(reviewerID, reviewer):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        results = _globals.orm.update(
+        results = _globals.pgapi.update(
             'Reviewers',
             reviewer,
             clause=f'WHERE reviewerID={reviewerID}'

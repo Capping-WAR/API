@@ -12,8 +12,8 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . /usr/src/app
 
-# Install ORM package
-WORKDIR /usr/src/app/database/orm
+# Install pgapi package
+WORKDIR /usr/src/app/database/pgapi
 RUN make build \
     && make install
 

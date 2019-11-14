@@ -76,7 +76,7 @@ def deserialize_date(string):
 def deserialize_datetime(string):
     """Deserializes string to datetime.
 
-    The string should be in iso8601 datetime format.
+    The string should be in iso8601 datetime fpgapiat.
 
     :param string: str.
     :type string: str

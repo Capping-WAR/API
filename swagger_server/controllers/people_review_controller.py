@@ -21,7 +21,7 @@ def add_people_review(people_review):  # noqa: E501
     if connexion.request.is_json:
         values = list(people_review.values())
         cols = ','.join(list(people_review.keys()))
-        results =  _globals.orm.insert('PeopleReviews', values, cols=cols)
+        results =  _globals.pgapi.insert('PeopleReviews', values, cols=cols)
         if type(results) != list:
             results = str(results)
             
@@ -38,7 +38,7 @@ def delete_people_review(sentenceID):  # noqa: E501
 
     :rtype: None
     """
-    results = _globals.orm.delete(
+    results = _globals.pgapi.delete(
         'PeopleReviews', 
         clause=f'WHERE sentenceID={sentenceID}'
     ) 
@@ -57,7 +57,7 @@ def get_people_review_by_id(sentenceID):  # noqa: E501
 
     :rtype: List[PeopleReview]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'PeopleReviews', 
         clause=f'WHERE sentenceID={sentenceID}'
     ) 
@@ -74,7 +74,7 @@ def get_people_reviews():  # noqa: E501
 
     :rtype: List[PeopleReview]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'PeopleReviews', 
     ) 
     if type(results) != list:
@@ -95,7 +95,7 @@ def update_people_review(sentenceID, people_review):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        results = _globals.orm.update(
+        results = _globals.pgapi.update(
             'PeopleReviews',
             people_review,
             clause=f'WHERE sentenceID={sentenceID}'

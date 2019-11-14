@@ -33,7 +33,7 @@ class TestSentenceRulesController(BaseTestCase):
         Delete a Sentence Rule
         """
         response = self.client.open(
-            '/api/v1/sentenceRule/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/sentenceRule/{sentenceID}'.fpgapiat(sentenceID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -44,7 +44,7 @@ class TestSentenceRulesController(BaseTestCase):
         Get a Sentence Rule by sentenceID
         """
         response = self.client.open(
-            '/api/v1/sentenceRule/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/sentenceRule/{sentenceID}'.fpgapiat(sentenceID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -67,7 +67,7 @@ class TestSentenceRulesController(BaseTestCase):
         """
         sentence_rule = SentenceRule()
         response = self.client.open(
-            '/api/v1/sentenceRule/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/sentenceRule/{sentenceID}'.fpgapiat(sentenceID=56),
             method='PUT',
             data=json.dumps(sentence_rule),
             content_type='application/json')

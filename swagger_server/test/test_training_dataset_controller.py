@@ -33,7 +33,7 @@ class TestTrainingDatasetController(BaseTestCase):
         Delete a Data Entry
         """
         response = self.client.open(
-            '/api/v1/TrainingDataset/{ID}'.format(ID=56),
+            '/api/v1/TrainingDataset/{ID}'.fpgapiat(ID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -44,7 +44,7 @@ class TestTrainingDatasetController(BaseTestCase):
         Get a Data Entry by ID
         """
         response = self.client.open(
-            '/api/v1/TrainingDataset/{ID}'.format(ID=56),
+            '/api/v1/TrainingDataset/{ID}'.fpgapiat(ID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -67,7 +67,7 @@ class TestTrainingDatasetController(BaseTestCase):
         """
         dataEntry = DataEntry()
         response = self.client.open(
-            '/api/v1/TrainingDataset/{ID}'.format(ID=56),
+            '/api/v1/TrainingDataset/{ID}'.fpgapiat(ID=56),
             method='PUT',
             data=json.dumps(dataEntry),
             content_type='application/json')

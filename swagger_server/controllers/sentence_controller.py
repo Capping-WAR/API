@@ -20,7 +20,7 @@ def add_sentence(sentence):  # noqa: E501
     if connexion.request.is_json:
         values = list(sentence.values())
         cols = ','.join(list(sentence.keys()))
-        results =  _globals.orm.insert('sentences', values, cols=cols)
+        results =  _globals.pgapi.insert('sentences', values, cols=cols)
         if type(results) != list:
             results = str(results)
             
@@ -38,7 +38,7 @@ def delete_sentence(sentenceID):  # noqa: E501
 
     :rtype: None
     """
-    results = _globals.orm.delete(
+    results = _globals.pgapi.delete(
         'Sentences', 
         clause=f'WHERE sentenceID={sentenceID}'
     ) 
@@ -57,7 +57,7 @@ def get_sentence_by_id(sentenceID):  # noqa: E501
 
     :rtype: List[Sentence]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'Sentences', 
         clause=f'WHERE sentenceID={sentenceID}'
     ) 
@@ -74,7 +74,7 @@ def get_sentences():  # noqa: E501
 
     :rtype: List[Sentence]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'Sentences', 
     ) 
     if type(results) != list:
@@ -95,7 +95,7 @@ def update_sentence(sentenceID, sentence):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        results = _globals.orm.update(
+        results = _globals.pgapi.update(
             'Sentences',
             sentence,
             clause=f'WHERE sentenceID={sentenceID}'

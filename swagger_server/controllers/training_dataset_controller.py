@@ -20,7 +20,7 @@ def add_data_entry(dataEntry):  # noqa: E501
     if connexion.request.is_json:
         values = list(dataEntry.values())
         cols = ','.join(list(dataEntry.keys()))
-        results =  _globals.orm.insert('TrainingDataset', values, cols=cols)
+        results =  _globals.pgapi.insert('TrainingDataset', values, cols=cols)
         if type(results) != list:
             results = str(results)
             
@@ -37,7 +37,7 @@ def delete_data_entry(sentenceID):  # noqa: E501
 
     :rtype: None
     """
-    results = _globals.orm.delete(
+    results = _globals.pgapi.delete(
         'TrainingDataset', 
         clause=f'WHERE sentenceID={sentenceID}'
     ) 
@@ -56,7 +56,7 @@ def get_data_entry_by_id(sentenceID):  # noqa: E501
 
     :rtype: List[DataEntry]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'TrainingDataset', 
         clause=f'WHERE sentenceID={sentenceID}'
     ) 
@@ -73,7 +73,7 @@ def get_data_entrys():  # noqa: E501
 
     :rtype: List[DataEntry]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'TrainingDataset', 
     ) 
     if type(results) != list:
@@ -94,7 +94,7 @@ def update_data_entry(sentenceID, dataEntry):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        results = _globals.orm.update(
+        results = _globals.pgapi.update(
             'TrainingDataset',
             dataEntry,
             clause=f'WHERE sentenceID={sentenceID}'

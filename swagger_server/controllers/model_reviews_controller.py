@@ -22,7 +22,7 @@ def add_model_review(model_review):  # noqa: E501
     if connexion.request.is_json:
         values = list(Rule.values())
         cols = ','.join(list(Rule.keys()))
-        results =  _globals.orm.insert('ModelReviews', values, cols=cols)
+        results =  _globals.pgapi.insert('ModelReviews', values, cols=cols)
         if type(results) != list:
             results = str(results)
             
@@ -39,7 +39,7 @@ def delete_model_review(sentenceID):  # noqa: E501
 
     :rtype: None
     """
-    results = _globals.orm.delete(
+    results = _globals.pgapi.delete(
         'ModelReviews', 
         clause=f'WHERE sentenceID={sentenceID}'
     ) 
@@ -58,7 +58,7 @@ def get_model_review_by_id(sentenceID):  # noqa: E501
 
     :rtype: List[ModelReview]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'ModelReviews', 
         clause=f'WHERE sentenceID={sentenceID}'
     ) 
@@ -75,7 +75,7 @@ def get_model_reviews():  # noqa: E501
 
     :rtype: List[ModelReview]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'ModelReviews', 
     ) 
     if type(results) != list:
@@ -96,7 +96,7 @@ def update_model_review(sentenceID, Model_Review):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        results = _globals.orm.update(
+        results = _globals.pgapi.update(
             'ModelReviews',
             Model_Review,
             clause=f'WHERE sentenceID={sentenceID}'

@@ -33,7 +33,7 @@ class TestModelsController(BaseTestCase):
         Delete a Model
         """
         response = self.client.open(
-            '/api/v1/model/{modelID}'.format(modelID=56),
+            '/api/v1/model/{modelID}'.fpgapiat(modelID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -44,7 +44,7 @@ class TestModelsController(BaseTestCase):
         Get a model version by modelID
         """
         response = self.client.open(
-            '/api/v1/model/{modelID}'.format(modelID=56),
+            '/api/v1/model/{modelID}'.fpgapiat(modelID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -67,7 +67,7 @@ class TestModelsController(BaseTestCase):
         """
         Model = Model()
         response = self.client.open(
-            '/api/v1/model/{modelID}'.format(modelID=56),
+            '/api/v1/model/{modelID}'.fpgapiat(modelID=56),
             method='PUT',
             data=json.dumps(Model),
             content_type='application/json')

@@ -1072,9 +1072,9 @@ definitions:
         description: "HTTP Status Code"
       message:
         type: "string"
-        example: "Invalid format"
+        example: "Invalid fpgapiat"
         description: "Info about what went wrong"
-    description: "Information about the results of the request to the server"
+    description: "Infpgapiation about the results of the request to the server"
   reviewer:
     required:
     - "emailAddress"

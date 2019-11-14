@@ -34,7 +34,7 @@ class TestModelReviewsController(BaseTestCase):
         Delete a Model Review
         """
         response = self.client.open(
-            '/api/v1/modelReview/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/modelReview/{sentenceID}'.fpgapiat(sentenceID=56),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -45,7 +45,7 @@ class TestModelReviewsController(BaseTestCase):
         Get a Rule by sentenceID
         """
         response = self.client.open(
-            '/api/v1/modelReview/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/modelReview/{sentenceID}'.fpgapiat(sentenceID=56),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -68,7 +68,7 @@ class TestModelReviewsController(BaseTestCase):
         """
         Model_Review = Rule()
         response = self.client.open(
-            '/api/v1/modelReview/{sentenceID}'.format(sentenceID=56),
+            '/api/v1/modelReview/{sentenceID}'.fpgapiat(sentenceID=56),
             method='PUT',
             data=json.dumps(Model_Review),
             content_type='application/json')

@@ -21,7 +21,7 @@ def add_model(Model):  # noqa: E501
     if connexion.request.is_json:
         values = list(Model.values())
         cols = ','.join(list(Model.keys()))
-        results =  _globals.orm.insert('Models', values, cols=cols)
+        results =  _globals.pgapi.insert('Models', values, cols=cols)
         if type(results) != list:
             results = str(results)
             
@@ -38,7 +38,7 @@ def delete_model(modelID):  # noqa: E501
 
     :rtype: None
     """
-    results = _globals.orm.delete(
+    results = _globals.pgapi.delete(
         'Models', 
         clause=f'WHERE modelID={modelID}'
     ) 
@@ -57,7 +57,7 @@ def get_model_by_id(modelID):  # noqa: E501
 
     :rtype: List[Model]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'Models', 
         clause=f'WHERE modelID={modelID}'
     ) 
@@ -74,7 +74,7 @@ def get_models():  # noqa: E501
 
     :rtype: List[Model]
     """
-    results = _globals.orm.get(
+    results = _globals.pgapi.get(
         'Models', 
     ) 
     if type(results) != list:
@@ -95,7 +95,7 @@ def update_model(modelID, Model):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        results = _globals.orm.update(
+        results = _globals.pgapi.update(
             'Models',
             Model,
             clause=f'WHERE modelID={modelID}'

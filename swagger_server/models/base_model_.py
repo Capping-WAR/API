@@ -54,7 +54,7 @@ class Model(object):
 
         :rtype: str
         """
-        return pprint.pformat(self.to_dict())
+        return pprint.pfpgapiat(self.to_dict())
 
     def __repr__(self):
         """For `print` and `pprint`"""
