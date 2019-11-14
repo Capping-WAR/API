@@ -6,9 +6,9 @@ import os
 import psycopg2
 from typing import List
 
-class ORM:
+class PGAPI:
     """
-    Object Relation Mapper
+    Postgres API
 
     All generic methods for interacting, connecting and 
     querying the database

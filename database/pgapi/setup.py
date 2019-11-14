@@ -5,14 +5,14 @@ from setuptools import find_packages
 from setuptools import setup
 
 setup(
-	name='orm',
+	name='pgapi',
 	version='1.0.0',
 	description=(
-		'An abstracted ORM for the War DB'
+		'An abstracted Postgres API for the War DB'
 	),
 	long_description=open('README.md').read(),
 	long_description_content_type='text/markdown',
-	url='https://github.com/Capping-WAR/API/tree/master/database/orm',
+	url='https://github.com/Capping-WAR/API/tree/master/database/pgapi',
 	author='dgisolfi',
 	license='MIT',
 	packages=find_packages(),

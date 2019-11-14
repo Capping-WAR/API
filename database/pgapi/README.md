@@ -1,4 +1,4 @@
-# ORM
+# Postgres API
 
 An Object Relational Mapper for the War Postgres Database
 
@@ -8,7 +8,7 @@ An Object Relational Mapper for the War Postgres Database
 
 ## Usage
 
-To create a new instance and connect to the database set the following env vars and initialize the ORM class. 
+To create a new instance and connect to the database set the following env vars and initialize the PGAPI class. 
 
 #### Env Vars
 
@@ -33,4 +33,4 @@ If needed add more methods to better facilitate the needs of the database.
 
 ## Testing
 
-To run the tests for the ORM package, run `make test`.
+To run the tests for the PGAPI package, run `make test`.

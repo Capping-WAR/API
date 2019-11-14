@@ -1,7 +1,7 @@
-# orm
+# pgapi
 # Author: Daniel Nicolas Gisolfi
 
-repo=orm
+repo=pgapi
 version=1.0.0
 
 intro:
