@@ -7,7 +7,7 @@ info:
   title: "WAR API"
   contact:
     email: "Daniel.Gisolfi1@marist.edu"
-host: "10.10.9.156:8080"
+host: "war.marist.ai:8080"
 basePath: "/api/v1"
 schemes:
 - "https"

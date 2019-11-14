@@ -4,7 +4,7 @@
 version: '2'
 services:
   api:
-    build: .
+    image: api
     restart:  unless-stopped
     container_name: war-api
     env_file: .env
