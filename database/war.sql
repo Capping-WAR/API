@@ -83,3 +83,26 @@ create table SentenceRules(
 	status       text not null,
   primary key(sentenceId, taggedRuleId)
 );
+
+create or replace function getTopReviewers(reviewer int)
+returns table(rid int, fname text, lname text, rep int) as $$
+begin 
+  if (reviewer not in (select reviewerid
+                     from reviewers 
+                     order by reputation desc
+                     limit 2))
+     then return query (select reviewerid, firstname, lastname, reputation
+                     from reviewers 
+                     order by reputation desc
+                     limit 2 );
+          return query (select reviewerid, firstname, lastname, reputation
+                       from reviewers
+                       where reviewerid = reviewer);
+  else
+    return query (select reviewerid, firstname, lastname, reputation
+                 from reviewers
+                 order by reputation desc
+                 limit 3);
+  end if;
+end;
+$$ language 'plpgsql';
