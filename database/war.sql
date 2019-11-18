@@ -106,3 +106,73 @@ begin
   end if;
 end;
 $$ language 'plpgsql';
+
+create function getTotalCountOfReviews(sentence int)
+returns int as $$
+  begin
+    return (select count(ruleReviewid)/5
+            from peoplereviews
+            where sentenceid = sentence);
+  end;
+$$ language 'plpgsql';
+
+create function getCorrectReviewsCount(sentence int)
+returns int as $$
+  begin
+    return(select count(pr.rulereview)
+            from peoplereviews pr inner join sentencerules sr on pr.sentenceid = sr.sentenceid
+            where pr.sentenceid = 1 and pr.rulereviewid = sr.taggedruleid and pr.rulereview = 1
+            group by pr.rulereviewid);
+  end;
+$$ language 'plpgsql';
+
+create function getIncorrectReviewsCount(sentence int)
+returns int as $$
+  begin
+    return(select count(pr.rulereview)
+            from peoplereviews pr inner join sentencerules sr on pr.sentenceid = sr.sentenceid
+            where pr.sentenceid = 1 and pr.rulereviewid = sr.taggedruleid and pr.rulereview = 0
+            group by pr.rulereviewid);
+  end;
+$$ language 'plpgsql';
+
+CREATE OR REPLACE PROCEDURE getSentenceReviewStatus(sentence int)
+AS $$
+  begin
+    if (getTotalCountOfReviews(sentence) == 5) then
+      if (getCorrectReviewsCount(sentence) == 5) or (getIncorrectReviewsCount(sentence) == 5) then
+        perform sendToDataset(sentence);
+      end if;
+    elsif (getTotalCountOfReviews(sentence) > 5) then
+      if ((getCorrectReviewsCount(sentence) / getIncorrectReviewsCount(sentence)) >= .75 and
+          (getCorrectReviewsCount(sentence) / getIncorrectReviewsCount(sentence)) < 1) then
+          perform sendToDataset(sentence);
+      elsif ((getIncorrectReviewsCount(sentence) / getCorrectReviewsCount(sentence)) >= .75 and
+                (getIncorrectReviewsCount(sentence) / getCorrectReviewsCount(sentence)) < 1) then
+         perform sendToDataset(sentence);
+      end if;
+    end if;
+  end;
+$$ language plpgsql;
+
+
+create function getSentenceFromID(sentID int)
+returns text as $$
+begin
+  return (select sentence
+          from sentences
+          where sentenceid = sentID);
+   end;
+$$ language 'plpgsql';
+
+create or replace procedure sendToDataset(sentence int)
+as $$
+BEGIN
+   insert into TrainingDataSet(sentenceId, sentence, ruleCorrectId, ruleCorrect, dateAdded)
+     select sentence, getSentenceFromId(sentence), rulereviewid, avg(rulereview), current_timestamp
+     from peoplereviews 
+     where sentenceid = sentence
+     group by rulereviewid; 
+END
+$$ 
+LANGUAGE plpgsql;
