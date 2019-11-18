@@ -25,7 +25,10 @@ def get_search_results(query):  # noqa: E501
         table = table.split('(')[0]
         table = table.split('where')[0]
         table = table.strip()
-    if 'select' not in q.lower() or 'call' not in q.lower():
+    if 'call' in q.lower():
+        table = q.lower().split('call')[1]
+        table = table.split('(')[0].strip()
+    if 'select' not in q.lower() and 'call' not in q.lower():
         return {
             'message':'query must be a select'
         }
