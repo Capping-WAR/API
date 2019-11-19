@@ -216,7 +216,7 @@ class PGAPI:
         """
 
         sql = f'UPDATE {table} SET'
-        last_col = sorted(values.keys())[-1]
+        last_col = list(values.keys())[-1]
         for col, val in values.items():
             if (type(val) is not int 
                 and type(val) is not float):

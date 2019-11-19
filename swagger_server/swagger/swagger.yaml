@@ -1369,7 +1369,7 @@ definitions:
         - "Other"
       platform:
         type: "string"
-        example: "Mac"
+        example: "isDesktop"
         enum:
         - "isDesktop"
         - "isMobile"
