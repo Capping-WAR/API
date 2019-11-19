@@ -21,9 +21,20 @@ class TestUtilsController(BaseTestCase):
         query = Query()
         response = self.client.open(
             '/api/v1/search',
-            method='GET',
+            method='POST',
             data=json.dumps(query),
             content_type='application/json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_post_retrain(self):
+        """Test case for post_retrain
+
+        checks for new entries in the traning data set table and sends a request to train a new model if one is found
+        """
+        response = self.client.open(
+            '/api/v1/retrain',
+            method='POST')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

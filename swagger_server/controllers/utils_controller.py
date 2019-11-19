@@ -1,11 +1,15 @@
 import connexion
+import requests
+import base64
 import six
+import os
 
 from swagger_server.models.query import Query  # noqa: E501
 from swagger_server.models.request_info import RequestInfo  # noqa: E501
 from swagger_server import util
 
 from swagger_server.__globals__ import _globals
+
 
 def get_search_results(query):  # noqa: E501
     """Runs a given SELECT Query
@@ -37,3 +41,50 @@ def get_search_results(query):  # noqa: E501
         if type(results) != list:
             results = str(results)
         return {table:results}
+
+def post_retrain():  # noqa: E501
+    """checks for new entries in the traning data set 
+    table and sends a request to train a new model if one is found
+
+     # noqa: E501
+
+
+    :rtype: None
+    """
+    count = _globals.pgapi._query('SELECT COUNT(*) FROM TrainingDataset')[0][0]
+    retrain_response = None
+    
+    if _globals.dataset_count is not None:
+        if count != _globals.dataset_count:
+            retrain_response = callRetrain()
+    else:
+        results = _globals.pgapi._query(
+            """
+            SELECT * 
+            FROM TrainingDataset 
+            WHERE dateAdded > current_timestamp - interval '1 minutes';
+            """
+        )
+        if len(results) != 0:
+            retrain_response = callRetrain()
+
+
+    _globals.dataset_count = count
+
+    if retrain_response is None:
+        return 'No new entries found', 200
+    else:
+        return retrain_response.json(), 201
+
+def callRetrain():
+    url = os.getenv('AI_API_URL')
+    username = os.getenv('AI_USER')
+    password = os.getenv('AI_PASS')
+
+    return requests.post(
+        url, 
+        auth=(username, password), 
+        json={
+            'callerID': 'WAR_API'
+        }
+    )
