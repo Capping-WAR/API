@@ -76,12 +76,30 @@ create table TrainingDataset(
   primary key(sentenceId, ruleCorrectId)
 );
 
---SentenceRules--
+--SentenceRules
 create table SentenceRules(
 	sentenceId   integer not null references Sentences(sentenceId),
 	taggedRuleId integer not null references Rules(ruleId),
 	status       text not null,
   primary key(sentenceId, taggedRuleId)
+);
+
+--UserStatistics
+create table userStatistics(
+    statisticsID SERIAL PRIMARY KEY,
+    windowsCount integer not null,
+    macosCount integer not null,
+    otherCount integer not null,
+    isDesktopCount integer not null,
+    isMobileCount integer not null
+);
+
+--loginStatistics
+create table loginStatistics(
+    dateID   SERIAL PRIMARY KEY,
+    dayDate timestamp not null,
+	loginCount   integer not null,
+    reviewCount   integer not null
 );
 
 create or replace function getTopReviewers(reviewer int)
