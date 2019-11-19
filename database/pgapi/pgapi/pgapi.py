@@ -189,7 +189,6 @@ class PGAPI:
         
         sql += f" VALUES ({self._join(values)})"
 
-        print(sql)
         return self._query(f'{sql};')
 
     def update(self, table:str, values:dict,
@@ -232,7 +231,6 @@ class PGAPI:
             
         if clause is not None:
             sql += f' {clause}'
-        print(sql)
         return self._query(f'{sql};')
 
     

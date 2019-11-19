@@ -9,7 +9,7 @@ def main():
     CORS(app.app)
     app.app.json_encoder = encoder.JSONEncoder
     app.add_api('swagger.yaml', arguments={'title': 'WAR API'})
-    app.run(port=8080, debug=True)
+    app.run(port=8080, debug=False)
 
 if __name__ == '__main__':
     main()
