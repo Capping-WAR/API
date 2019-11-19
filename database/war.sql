@@ -76,13 +76,43 @@ create table TrainingDataset(
   primary key(sentenceId, ruleCorrectId)
 );
 
---SentenceRules--
+--SentenceRules
 create table SentenceRules(
 	sentenceId   integer not null references Sentences(sentenceId),
 	taggedRuleId integer not null references Rules(ruleId),
 	status       text not null,
   primary key(sentenceId, taggedRuleId)
 );
+
+--UserStatistics
+create table userStatistics(
+    statisticsID SERIAL PRIMARY KEY,
+    windowsCount integer not null,
+    macosCount integer not null,
+    otherCount integer not null,
+    isDesktopCount integer not null,
+    isMobileCount integer not null
+);
+
+insert into userStatistics (windowsCount, macosCount, otherCount, isDesktopCount, isMobileCount) values(0,0,0,0,0);
+
+--loginStatistics
+create table loginStatistics(
+    dateID   SERIAL PRIMARY KEY,
+    dayDate timestamp not null,
+	loginCount   integer not null,
+    reviewCount   integer not null
+);
+
+-- update these dates to today and the previous 6 days
+insert into loginStatistics (dayDate, loginCount, reviewCount) values
+(to_date('2019-11-13', 'YYYY-MM-DD'),0,0),
+(to_date('2019-11-14', 'YYYY-MM-DD'),0,0),
+(to_date('2019-11-15', 'YYYY-MM-DD'),0,0),
+(to_date('2019-11-16', 'YYYY-MM-DD'),0,0),
+(to_date('2019-11-17', 'YYYY-MM-DD'),0,0),
+(to_date('2019-11-18', 'YYYY-MM-DD'),0,0),
+(to_date('2019-11-19', 'YYYY-MM-DD'),0,0);
 
 create or replace function getTopReviewers(reviewer int)
 returns table(rid int, fname text, lname text, rep int) as $$

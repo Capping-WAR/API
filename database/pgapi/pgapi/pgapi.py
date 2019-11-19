@@ -189,7 +189,6 @@ class PGAPI:
         
         sql += f" VALUES ({self._join(values)})"
 
-        print(sql)
         return self._query(f'{sql};')
 
     def update(self, table:str, values:dict,
@@ -216,7 +215,7 @@ class PGAPI:
         """
 
         sql = f'UPDATE {table} SET'
-        last_col = sorted(values.keys())[-1]
+        last_col = list(values.keys())[-1]
         for col, val in values.items():
             if (type(val) is not int 
                 and type(val) is not float):
@@ -232,7 +231,6 @@ class PGAPI:
             
         if clause is not None:
             sql += f' {clause}'
-        print(sql)
         return self._query(f'{sql};')
 
     

@@ -1050,6 +1050,46 @@ paths:
           schema:
             $ref: "#/definitions/request_info"
       x-swagger-router-controller: "swagger_server.controllers.utils_controller"
+  /userStats:
+    post:
+      tags:
+      - "Site Statistics"
+      summary: "updates current user statistics count"
+      operationId: "post_user_stats"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "user_info"
+        description: "Which os and platform is the user on."
+        required: true
+        schema:
+          $ref: "#/definitions/user_info"
+      responses:
+        "200":
+          description: "User Stats updated"
+        "400":
+          description: "update/insert error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.site_statistics_controller"
+  /loginStats:
+    post:
+      tags:
+      - "Site Statistics"
+      summary: "updates current login statistics count"
+      operationId: "post_login_stats"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "Login Stats updated"
+        "400":
+          description: "update/insert error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.site_statistics_controller"
 definitions:
   model:
     required:
@@ -1315,3 +1355,21 @@ definitions:
         example: "SELECT * FROM TABLE;"
         description: "A select query to be run on the db. Nothing except for SELECT\
           \ queries will be run"
+  user_info:
+    required:
+    - "os"
+    - "platform"
+    properties:
+      os:
+        type: "string"
+        example: "Mac"
+        enum:
+        - "Mac"
+        - "Windows"
+        - "Other"
+      platform:
+        type: "string"
+        example: "isDesktop"
+        enum:
+        - "isDesktop"
+        - "isMobile"
