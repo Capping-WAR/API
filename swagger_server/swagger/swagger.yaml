@@ -1050,7 +1050,7 @@ paths:
           schema:
             $ref: "#/definitions/request_info"
       x-swagger-router-controller: "swagger_server.controllers.utils_controller"
-  /userStats:
+  /statistics/userStats:
     post:
       tags:
       - "Site Statistics"
@@ -1073,7 +1073,7 @@ paths:
           schema:
             $ref: "#/definitions/request_info"
       x-swagger-router-controller: "swagger_server.controllers.site_statistics_controller"
-  /loginStats:
+  /statistics/loginStats:
     post:
       tags:
       - "Site Statistics"
