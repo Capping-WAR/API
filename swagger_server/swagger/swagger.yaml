@@ -23,13 +23,13 @@ paths:
       - "application/json"
       parameters: []
       responses:
-        200:
+        "200":
           description: "Reviewers successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/reviewer"
-        400:
+        "400":
           description: "Reviewers retrieval error"
           schema:
             $ref: "#/definitions/request_info"
@@ -52,9 +52,9 @@ paths:
         schema:
           $ref: "#/definitions/reviewer"
       responses:
-        201:
+        "201":
           description: "Reviewer successfully added"
-        400:
+        "400":
           description: "Reviewer add error"
           schema:
             $ref: "#/definitions/request_info"
@@ -74,17 +74,17 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Reviewer successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/reviewer"
-        400:
+        "400":
           description: "Reviewer retrieval error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Reviewer does not exist"
       x-swagger-router-controller: "swagger_server.controllers.reviewer_controller"
     put:
@@ -107,13 +107,13 @@ paths:
         schema:
           $ref: "#/definitions/reviewer"
       responses:
-        200:
+        "200":
           description: "Reviewer successfully updated"
-        400:
+        "400":
           description: "Reviewer update error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Reviewer does not exist"
       x-swagger-router-controller: "swagger_server.controllers.reviewer_controller"
     delete:
@@ -128,13 +128,13 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Reviewer successfully deleted"
-        400:
+        "400":
           description: "Reviewer delete error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Reviewer does not exist"
       x-swagger-router-controller: "swagger_server.controllers.reviewer_controller"
   /reviews:
@@ -147,13 +147,13 @@ paths:
       - "application/json"
       parameters: []
       responses:
-        200:
+        "200":
           description: "People Reviews successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/people_review"
-        400:
+        "400":
           description: "People Reviews retrieval error"
           schema:
             $ref: "#/definitions/request_info"
@@ -176,9 +176,9 @@ paths:
         schema:
           $ref: "#/definitions/people_review"
       responses:
-        201:
+        "201":
           description: "People Review successfully added"
-        400:
+        "400":
           description: "People Review add error"
           schema:
             $ref: "#/definitions/request_info"
@@ -198,17 +198,17 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "People Review successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/people_review"
-        400:
+        "400":
           description: "People Review retrieval error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Review does not exist"
       x-swagger-router-controller: "swagger_server.controllers.people_review_controller"
     put:
@@ -231,13 +231,13 @@ paths:
         schema:
           $ref: "#/definitions/people_review"
       responses:
-        200:
+        "200":
           description: "People Review successfully updated"
-        400:
+        "400":
           description: "People Review update error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "People Review does not exist"
       x-swagger-router-controller: "swagger_server.controllers.people_review_controller"
     delete:
@@ -252,13 +252,13 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "People Review successfully deleted"
-        400:
+        "400":
           description: "People Review delete error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "People Review does not exist"
       x-swagger-router-controller: "swagger_server.controllers.people_review_controller"
   /sentences:
@@ -271,13 +271,13 @@ paths:
       - "application/json"
       parameters: []
       responses:
-        200:
+        "200":
           description: "Sentences successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/sentence"
-        400:
+        "400":
           description: "Sentences retrieval error"
           schema:
             $ref: "#/definitions/request_info"
@@ -300,9 +300,9 @@ paths:
         schema:
           $ref: "#/definitions/sentence"
       responses:
-        201:
+        "201":
           description: "Sentence successfully added"
-        400:
+        "400":
           description: "Sentence add error"
           schema:
             $ref: "#/definitions/request_info"
@@ -322,17 +322,17 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Sentence successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/sentence"
-        400:
+        "400":
           description: "Sentence retrieval error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Sentence does not exist"
       x-swagger-router-controller: "swagger_server.controllers.sentence_controller"
     put:
@@ -355,13 +355,13 @@ paths:
         schema:
           $ref: "#/definitions/sentence"
       responses:
-        200:
+        "200":
           description: "Sentence successfully updated"
-        400:
+        "400":
           description: "Sentence update error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Sentence does not exist"
       x-swagger-router-controller: "swagger_server.controllers.sentence_controller"
     delete:
@@ -376,13 +376,13 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Sentence successfully deleted"
-        400:
+        "400":
           description: "Sentence delete error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Sentence does not exist"
       x-swagger-router-controller: "swagger_server.controllers.sentence_controller"
   /TrainingDataset:
@@ -395,13 +395,13 @@ paths:
       - "application/json"
       parameters: []
       responses:
-        200:
+        "200":
           description: "Data Entries successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/dataEntry"
-        400:
+        "400":
           description: "Data Entries retrieval error"
           schema:
             $ref: "#/definitions/request_info"
@@ -423,9 +423,9 @@ paths:
         schema:
           $ref: "#/definitions/dataEntry"
       responses:
-        201:
+        "201":
           description: "Data Entry successfully added"
-        400:
+        "400":
           description: "Data Entry add error"
           schema:
             $ref: "#/definitions/request_info"
@@ -445,17 +445,17 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Data Entry successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/dataEntry"
-        400:
+        "400":
           description: "Data Entry retrieval error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Data Entry does not exist"
       x-swagger-router-controller: "swagger_server.controllers.training_dataset_controller"
     put:
@@ -478,13 +478,13 @@ paths:
         schema:
           $ref: "#/definitions/dataEntry"
       responses:
-        200:
+        "200":
           description: "Data Entry successfully updated"
-        400:
+        "400":
           description: "Data Entry update error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Data Entry does not exist"
       x-swagger-router-controller: "swagger_server.controllers.training_dataset_controller"
     delete:
@@ -499,13 +499,13 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Data Entry successfully deleted"
-        400:
+        "400":
           description: "Data Entry delete error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Data Entry does not exist"
       x-swagger-router-controller: "swagger_server.controllers.training_dataset_controller"
   /models:
@@ -518,13 +518,13 @@ paths:
       - "application/json"
       parameters: []
       responses:
-        200:
+        "200":
           description: "Models successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/model"
-        400:
+        "400":
           description: "Models retrieval error"
           schema:
             $ref: "#/definitions/request_info"
@@ -547,9 +547,9 @@ paths:
         schema:
           $ref: "#/definitions/model"
       responses:
-        201:
+        "201":
           description: "Model successfully added"
-        400:
+        "400":
           description: "Model add error"
           schema:
             $ref: "#/definitions/request_info"
@@ -569,17 +569,17 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Model successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/model"
-        400:
+        "400":
           description: "Model retrieval error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Model does not exist"
       x-swagger-router-controller: "swagger_server.controllers.models_controller"
     put:
@@ -602,13 +602,13 @@ paths:
         schema:
           $ref: "#/definitions/model"
       responses:
-        200:
+        "200":
           description: "Model successfully updated"
-        400:
+        "400":
           description: "Model update error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Model does not exist"
       x-swagger-router-controller: "swagger_server.controllers.models_controller"
     delete:
@@ -623,13 +623,13 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Model successfully deleted"
-        400:
+        "400":
           description: "Model delete error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Model does not exist"
       x-swagger-router-controller: "swagger_server.controllers.models_controller"
   /rules:
@@ -642,13 +642,13 @@ paths:
       - "application/json"
       parameters: []
       responses:
-        200:
+        "200":
           description: "Rules successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/rule"
-        400:
+        "400":
           description: "Rules retrieval error"
           schema:
             $ref: "#/definitions/request_info"
@@ -671,9 +671,9 @@ paths:
         schema:
           $ref: "#/definitions/rule"
       responses:
-        201:
+        "201":
           description: "Rule successfully added"
-        400:
+        "400":
           description: "Rule add error"
           schema:
             $ref: "#/definitions/request_info"
@@ -693,17 +693,17 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Rule successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/rule"
-        400:
+        "400":
           description: "Rule retrieval error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Rule does not exist"
       x-swagger-router-controller: "swagger_server.controllers.rules_controller"
     put:
@@ -726,13 +726,13 @@ paths:
         schema:
           $ref: "#/definitions/rule"
       responses:
-        200:
+        "200":
           description: "Rule successfully updated"
-        400:
+        "400":
           description: "Rule update error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Rule does not exist"
       x-swagger-router-controller: "swagger_server.controllers.rules_controller"
     delete:
@@ -747,13 +747,13 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Rule successfully deleted"
-        400:
+        "400":
           description: "Rule delete error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Rule does not exist"
       x-swagger-router-controller: "swagger_server.controllers.rules_controller"
   /modelReviews:
@@ -766,13 +766,13 @@ paths:
       - "application/json"
       parameters: []
       responses:
-        200:
+        "200":
           description: "Model Reviews successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/model_review"
-        400:
+        "400":
           description: "Model Reviews retrieval error"
           schema:
             $ref: "#/definitions/request_info"
@@ -795,9 +795,9 @@ paths:
         schema:
           $ref: "#/definitions/model_review"
       responses:
-        201:
+        "201":
           description: "Model Review successfully added"
-        400:
+        "400":
           description: "Model Review add error"
           schema:
             $ref: "#/definitions/request_info"
@@ -817,17 +817,17 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Model Review successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/model_review"
-        400:
+        "400":
           description: "Model Review retrieval error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Model Review does not exist"
       x-swagger-router-controller: "swagger_server.controllers.model_reviews_controller"
     put:
@@ -850,13 +850,13 @@ paths:
         schema:
           $ref: "#/definitions/model_review"
       responses:
-        200:
+        "200":
           description: "Model Review successfully updated"
-        400:
+        "400":
           description: "Model Review update error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Model Review does not exist"
       x-swagger-router-controller: "swagger_server.controllers.model_reviews_controller"
     delete:
@@ -871,13 +871,13 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Model Review successfully deleted"
-        400:
+        "400":
           description: "Model Review delete error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Model Review does not exist"
       x-swagger-router-controller: "swagger_server.controllers.model_reviews_controller"
   /sentenceRules:
@@ -890,13 +890,13 @@ paths:
       - "application/json"
       parameters: []
       responses:
-        200:
+        "200":
           description: "Sentence Rules successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/sentence_rule"
-        400:
+        "400":
           description: "Sentence Rules retrieval error"
           schema:
             $ref: "#/definitions/request_info"
@@ -919,9 +919,9 @@ paths:
         schema:
           $ref: "#/definitions/sentence_rule"
       responses:
-        201:
+        "201":
           description: "Sentence Rule successfully added"
-        400:
+        "400":
           description: "Sentence Rule add error"
           schema:
             $ref: "#/definitions/request_info"
@@ -941,17 +941,17 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Sentence Rule successfully retrieved"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/sentence_rule"
-        400:
+        "400":
           description: "Sentence Rule retrieval error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Sentence Rule does not exist"
       x-swagger-router-controller: "swagger_server.controllers.sentence_rules_controller"
     put:
@@ -974,13 +974,13 @@ paths:
         schema:
           $ref: "#/definitions/sentence_rule"
       responses:
-        200:
+        "200":
           description: "Sentence Rule successfully updated"
-        400:
+        "400":
           description: "Sentence Rule update error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Sentence Rule does not exist"
       x-swagger-router-controller: "swagger_server.controllers.sentence_rules_controller"
     delete:
@@ -995,13 +995,13 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
+        "200":
           description: "Sentence Rule successfully deleted"
-        400:
+        "400":
           description: "Sentence Rule delete error"
           schema:
             $ref: "#/definitions/request_info"
-        404:
+        "404":
           description: "Sentence Rule does not exist"
       x-swagger-router-controller: "swagger_server.controllers.sentence_rules_controller"
   /search:
@@ -1020,13 +1020,33 @@ paths:
         schema:
           $ref: "#/definitions/query"
       responses:
-        200:
+        "200":
           description: "Search Results successfully retrieved"
           schema:
             type: "array"
             items: {}
-        400:
+        "400":
           description: "Search Results retrieval error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.utils_controller"
+  /retrain:
+    post:
+      tags:
+      - "Utils"
+      summary: "checks for new entries in the traning data set table and sends a request\
+        \ to train a new model if one is found"
+      operationId: "post_retrain"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "No new entries found"
+        "201":
+          description: "New entry found, retrian called"
+        "400":
+          description: "retrain error"
           schema:
             $ref: "#/definitions/request_info"
       x-swagger-router-controller: "swagger_server.controllers.utils_controller"
@@ -1072,7 +1092,7 @@ definitions:
         description: "HTTP Status Code"
       message:
         type: "string"
-        example: "Invalid fpgapiat"
+        example: "Invalid"
         description: "Info about what went wrong"
     description: "Infpgapiation about the results of the request to the server"
   reviewer:
