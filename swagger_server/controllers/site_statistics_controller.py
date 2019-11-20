@@ -29,7 +29,7 @@ def post_login_stats():  # noqa: E501
             WHERE dayDate >= '{datetime.datetime.now().date()}'::date 
             AND dayDate < ('{datetime.datetime.now().date()}'::date + '1 day'::interval)
         """
-    )[0]
+    )
 
     results = None
     # check if todays date is already one of the days in the table
@@ -55,7 +55,7 @@ def post_login_stats():  # noqa: E501
         )
     else:
         (dateID, dayDate, loginCount,
-        reviewCount) = current_day
+        reviewCount) = current_day[0]
 
         results = _globals.pgapi.update(
             'loginStatistics', 
