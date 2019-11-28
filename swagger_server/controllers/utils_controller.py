@@ -42,6 +42,17 @@ def get_search_results(query):  # noqa: E501
             results = str(results)
         return {table:results}
 
+def get_threads():  # noqa: E501
+    """gets all running threads from AI API
+
+     # noqa: E501
+
+
+    :rtype: None
+    """
+    url = os.getenv('AI_API_URL')
+    return requests.get(f'{url}/threads').json()
+
 def post_retrain():  # noqa: E501
     """checks for new entries in the traning data set 
     table and sends a request to train a new model if one is found
@@ -82,7 +93,7 @@ def callRetrain():
     password = os.getenv('AI_PASS')
 
     return requests.post(
-        url, 
+        f'{url}/retrain', 
         auth=(username, password), 
         json={
             'callerID': 'WAR_API'

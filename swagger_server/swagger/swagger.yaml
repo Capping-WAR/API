@@ -7,8 +7,8 @@ info:
   title: "WAR API"
   contact:
     email: "Daniel.Gisolfi1@marist.edu"
-host: "dgisolfi.xyz:8085"
-basePath: "/api/v1"
+host: "war.marist.ai:8080"
+basePath: "/v1"
 schemes:
 - "https"
 - "http"
@@ -1039,7 +1039,13 @@ paths:
       operationId: "post_retrain"
       produces:
       - "application/json"
-      parameters: []
+      parameters:
+      - in: "body"
+        name: "retrain_info"
+        description: "Who is calling this retrain?"
+        required: true
+        schema:
+          $ref: "#/definitions/retrain_info"
       responses:
         "200":
           description: "No new entries found"
@@ -1047,6 +1053,23 @@ paths:
           description: "New entry found, retrian called"
         "400":
           description: "retrain error"
+          schema:
+            $ref: "#/definitions/request_info"
+      x-swagger-router-controller: "swagger_server.controllers.utils_controller"
+  /threads:
+    get:
+      tags:
+      - "Utils"
+      summary: "gets all running threads from AI API"
+      operationId: "get_threads"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "Threads Retrieved"
+        "400":
+          description: "threads retrival error"
           schema:
             $ref: "#/definitions/request_info"
       x-swagger-router-controller: "swagger_server.controllers.utils_controller"
@@ -1373,3 +1396,10 @@ definitions:
         enum:
         - "isDesktop"
         - "isMobile"
+  retrain_info:
+    required:
+    - "callerID"
+    properties:
+      callerID:
+        type: "string"
+        example: "Daniel"
