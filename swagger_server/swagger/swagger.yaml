@@ -1118,35 +1118,41 @@ definitions:
     required:
     - "balAccuracy"
     - "dateAdded"
-    - "loc"
+    - "isActive"
     - "modelVersion"
+    - "ruleId"
     properties:
       modelID:
         type: "integer"
         example: 1
         description: "Unique ID of the model"
       modelVersion:
-        type: "integer"
-        example: 1
+        type: "string"
+        example: "THE_GOOD_ONE"
         description: "Version of the model"
       balAccuracy:
         type: "number"
         example: 99
         description: "Percentage Accuracy of the model"
-      loc:
-        type: "string"
-        example: "/home/user/models"
-        description: "absolute path to model on disk"
+      isActive:
+        type: "boolean"
+        example: true
+        description: "is the current model in use for a given rule"
       dateAdded:
         type: "string"
         example: "2019-09-24 22:33:19.000"
         description: "Date added to the database"
+      ruleId:
+        type: "integer"
+        example: 1
+        description: "The Rule ID for the corresponding rule in the rules table"
     example:
       modelID: 1
-      modelVersion: 1
+      modelVersion: "TEST"
       balAccuracy: 99
-      loc: "/home/user/models"
+      isActive: true
       dateAdded: "2019-09-24 22:33:19.000"
+      ruleID: 1
   request_info:
     properties:
       status_code:
@@ -1164,6 +1170,7 @@ definitions:
     - "firstName"
     - "lastName"
     - "reputation"
+    - "isAdmin"
     properties:
       reviewerID:
         type: "integer"
@@ -1181,7 +1188,7 @@ definitions:
         type: "string"
         example: "labouseur"
         description: "The last name of the user"
-      admin:
+      isAdmin:
         type: "boolean"
         example: false
         description: "Denotes wether this user has admin privileges"
@@ -1194,7 +1201,7 @@ definitions:
       lastName: "labouseur"
       emailAddress: "user@marist.edu"
       reviewerID: 1
-      admin: false
+      isAdmin: false
       reputation: 93
   people_review:
     required:
