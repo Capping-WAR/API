@@ -15,41 +15,46 @@ class Model(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, model_id: int=None, model_version: int=None, bal_accuracy: float=None, location: str=None, date_added: str=None):  # noqa: E501
+    def __init__(self, model_id: int=None, model_version: str=None, bal_accuracy: float=None, is_active: bool=None, date_added: str=None, rule_id: int=None):  # noqa: E501
         """Model - a model defined in Swagger
 
         :param model_id: The model_id of this Model.  # noqa: E501
         :type model_id: int
         :param model_version: The model_version of this Model.  # noqa: E501
-        :type model_version: int
+        :type model_version: str
         :param bal_accuracy: The bal_accuracy of this Model.  # noqa: E501
         :type bal_accuracy: float
-        :param location: The location of this Model.  # noqa: E501
-        :type location: str
+        :param is_active: The is_active of this Model.  # noqa: E501
+        :type is_active: bool
         :param date_added: The date_added of this Model.  # noqa: E501
         :type date_added: str
+        :param rule_id: The rule_id of this Model.  # noqa: E501
+        :type rule_id: int
         """
         self.swagger_types = {
             'model_id': int,
-            'model_version': int,
+            'model_version': str,
             'bal_accuracy': float,
-            'location': str,
-            'date_added': str
+            'is_active': bool,
+            'date_added': str,
+            'rule_id': int
         }
 
         self.attribute_map = {
             'model_id': 'modelID',
             'model_version': 'modelVersion',
             'bal_accuracy': 'balAccuracy',
-            'location': 'location',
-            'date_added': 'dateAdded'
+            'is_active': 'isActive',
+            'date_added': 'dateAdded',
+            'rule_id': 'ruleId'
         }
 
         self._model_id = model_id
         self._model_version = model_version
         self._bal_accuracy = bal_accuracy
-        self._location = location
+        self._is_active = is_active
         self._date_added = date_added
+        self._rule_id = rule_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'Model':
@@ -86,24 +91,24 @@ class Model(Model):
         self._model_id = model_id
 
     @property
-    def model_version(self) -> int:
+    def model_version(self) -> str:
         """Gets the model_version of this Model.
 
         Version of the model  # noqa: E501
 
         :return: The model_version of this Model.
-        :rtype: int
+        :rtype: str
         """
         return self._model_version
 
     @model_version.setter
-    def model_version(self, model_version: int):
+    def model_version(self, model_version: str):
         """Sets the model_version of this Model.
 
         Version of the model  # noqa: E501
 
         :param model_version: The model_version of this Model.
-        :type model_version: int
+        :type model_version: str
         """
         if model_version is None:
             raise ValueError("Invalid value for `model_version`, must not be `None`")  # noqa: E501
@@ -136,29 +141,29 @@ class Model(Model):
         self._bal_accuracy = bal_accuracy
 
     @property
-    def location(self) -> str:
-        """Gets the location of this Model.
+    def is_active(self) -> bool:
+        """Gets the is_active of this Model.
 
-        absolute path to model on disk  # noqa: E501
+        is the current model in use for a given rule  # noqa: E501
 
-        :return: The location of this Model.
-        :rtype: str
+        :return: The is_active of this Model.
+        :rtype: bool
         """
-        return self._location
+        return self._is_active
 
-    @location.setter
-    def location(self, location: str):
-        """Sets the location of this Model.
+    @is_active.setter
+    def is_active(self, is_active: bool):
+        """Sets the is_active of this Model.
 
-        absolute path to model on disk  # noqa: E501
+        is the current model in use for a given rule  # noqa: E501
 
-        :param location: The location of this Model.
-        :type location: str
+        :param is_active: The is_active of this Model.
+        :type is_active: bool
         """
-        if location is None:
-            raise ValueError("Invalid value for `location`, must not be `None`")  # noqa: E501
+        if is_active is None:
+            raise ValueError("Invalid value for `is_active`, must not be `None`")  # noqa: E501
 
-        self._location = location
+        self._is_active = is_active
 
     @property
     def date_added(self) -> str:
@@ -184,3 +189,28 @@ class Model(Model):
             raise ValueError("Invalid value for `date_added`, must not be `None`")  # noqa: E501
 
         self._date_added = date_added
+
+    @property
+    def rule_id(self) -> int:
+        """Gets the rule_id of this Model.
+
+        The Rule ID for the corresponding rule in the rules table  # noqa: E501
+
+        :return: The rule_id of this Model.
+        :rtype: int
+        """
+        return self._rule_id
+
+    @rule_id.setter
+    def rule_id(self, rule_id: int):
+        """Sets the rule_id of this Model.
+
+        The Rule ID for the corresponding rule in the rules table  # noqa: E501
+
+        :param rule_id: The rule_id of this Model.
+        :type rule_id: int
+        """
+        if rule_id is None:
+            raise ValueError("Invalid value for `rule_id`, must not be `None`")  # noqa: E501
+
+        self._rule_id = rule_id

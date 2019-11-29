@@ -15,7 +15,7 @@ class Reviewer(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, reviewer_id: int=None, email_address: str=None, first_name: str=None, last_name: str=None, admin: bool=None, reputation: int=None):  # noqa: E501
+    def __init__(self, reviewer_id: int=None, email_address: str=None, first_name: str=None, last_name: str=None, is_admin: bool=None, reputation: int=None):  # noqa: E501
         """Reviewer - a model defined in Swagger
 
         :param reviewer_id: The reviewer_id of this Reviewer.  # noqa: E501
@@ -26,8 +26,8 @@ class Reviewer(Model):
         :type first_name: str
         :param last_name: The last_name of this Reviewer.  # noqa: E501
         :type last_name: str
-        :param admin: The admin of this Reviewer.  # noqa: E501
-        :type admin: bool
+        :param is_admin: The is_admin of this Reviewer.  # noqa: E501
+        :type is_admin: bool
         :param reputation: The reputation of this Reviewer.  # noqa: E501
         :type reputation: int
         """
@@ -36,7 +36,7 @@ class Reviewer(Model):
             'email_address': str,
             'first_name': str,
             'last_name': str,
-            'admin': bool,
+            'is_admin': bool,
             'reputation': int
         }
 
@@ -45,7 +45,7 @@ class Reviewer(Model):
             'email_address': 'emailAddress',
             'first_name': 'firstName',
             'last_name': 'lastName',
-            'admin': 'admin',
+            'is_admin': 'isAdmin',
             'reputation': 'reputation'
         }
 
@@ -53,7 +53,7 @@ class Reviewer(Model):
         self._email_address = email_address
         self._first_name = first_name
         self._last_name = last_name
-        self._admin = admin
+        self._is_admin = is_admin
         self._reputation = reputation
 
     @classmethod
@@ -166,27 +166,29 @@ class Reviewer(Model):
         self._last_name = last_name
 
     @property
-    def admin(self) -> bool:
-        """Gets the admin of this Reviewer.
+    def is_admin(self) -> bool:
+        """Gets the is_admin of this Reviewer.
 
         Denotes wether this user has admin privileges  # noqa: E501
 
-        :return: The admin of this Reviewer.
+        :return: The is_admin of this Reviewer.
         :rtype: bool
         """
-        return self._admin
+        return self._is_admin
 
-    @admin.setter
-    def admin(self, admin: bool):
-        """Sets the admin of this Reviewer.
+    @is_admin.setter
+    def is_admin(self, is_admin: bool):
+        """Sets the is_admin of this Reviewer.
 
         Denotes wether this user has admin privileges  # noqa: E501
 
-        :param admin: The admin of this Reviewer.
-        :type admin: bool
+        :param is_admin: The is_admin of this Reviewer.
+        :type is_admin: bool
         """
+        if is_admin is None:
+            raise ValueError("Invalid value for `is_admin`, must not be `None`")  # noqa: E501
 
-        self._admin = admin
+        self._is_admin = is_admin
 
     @property
     def reputation(self) -> int:

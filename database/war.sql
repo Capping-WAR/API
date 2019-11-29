@@ -48,12 +48,12 @@ create table PeopleReviews(
 
 --Models--
 create table Models(
-	modelId   SERIAL PRIMARY KEY,
-    modelVersion SERIAL,
+    modelId SERIAL PRIMARY KEY,
+    modelVersion text not null,
 	balAccuracy  decimal not null,
-	loc          text not null,
-	dateAdded    timestamp not null
-    UNIQUE(modelId, modelVersion)
+	isActive     boolean not null,
+	dateAdded    timestamp not null,
+    ruleId       integer not null references Rules(ruleId)
 );
 
 --Model Reviews--
@@ -146,20 +146,20 @@ returns int as $$
   end;
 $$ language 'plpgsql';
 
-create function getCorrectReviewsCount(sentence int)
+create or replace function getCorrectReviewsCount(sentence int)
 returns int as $$
   begin
-    return(select count(pr.rulereview)
+    return(select count(pr.rulereview)/5
             from peoplereviews pr inner join sentencerules sr on pr.sentenceid = sr.sentenceid
             where pr.sentenceid = 1 and pr.rulereviewid = sr.taggedruleid and pr.rulereview = 1
             group by pr.rulereviewid);
   end;
 $$ language 'plpgsql';
 
-create function getIncorrectReviewsCount(sentence int)
+create or replace function getIncorrectReviewsCount(sentence int)
 returns int as $$
   begin
-    return(select count(pr.rulereview)
+    return(select count(pr.rulereview)/5
             from peoplereviews pr inner join sentencerules sr on pr.sentenceid = sr.sentenceid
             where pr.sentenceid = 1 and pr.rulereviewid = sr.taggedruleid and pr.rulereview = 0
             group by pr.rulereviewid);
@@ -169,22 +169,27 @@ $$ language 'plpgsql';
 CREATE OR REPLACE PROCEDURE getSentenceReviewStatus(sentence int)
 AS $$
   begin
-    if (getTotalCountOfReviews(sentence) == 5) then
-      if (getCorrectReviewsCount(sentence) == 5) or (getIncorrectReviewsCount(sentence) == 5) then
+    if (getTotalCountOfReviews(sentence) = 5) then
+      if (getCorrectReviewsCount(sentence) = 5) or (getIncorrectReviewsCount(sentence) == 5) then
         perform sendToDataset(sentence);
       end if;
     elsif (getTotalCountOfReviews(sentence) > 5) then
       if ((getCorrectReviewsCount(sentence) / getIncorrectReviewsCount(sentence)) >= .75 and
           (getCorrectReviewsCount(sentence) / getIncorrectReviewsCount(sentence)) < 1) then
           perform sendToDataset(sentence);
+		  update sentenceRules
+		  set status = 'Corrected'
+		  where sentenceid = sentence;
       elsif ((getIncorrectReviewsCount(sentence) / getCorrectReviewsCount(sentence)) >= .75 and
                 (getIncorrectReviewsCount(sentence) / getCorrectReviewsCount(sentence)) < 1) then
          perform sendToDataset(sentence);
+		 update sentenceRules
+		  set status = 'Corrected'
+		  where sentenceid = sentence;
       end if;
     end if;
   end;
 $$ language plpgsql;
-
 
 create function getSentenceFromID(sentID int)
 returns text as $$
@@ -206,3 +211,72 @@ BEGIN
 END
 $$ 
 LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION SentenceToBeReviewed (userID INT)
+RETURNS TABLE(sentenceid INT) AS $$
+    BEGIN
+        RETURN QUERY select sr.sentenceid
+        from sentencerules sr inner join rules r on sr.taggedruleid = r.ruleid
+        where sr.sentenceid not in (select sentenceid
+                            from peoplereviews 
+                            where reviewerid = userID)
+        and sr.status = 'In Review'
+        order by priority desc
+        limit 1;
+    END;
+$$ LANGUAGE 'plpgsql';
+
+create or replace procedure updatePriority()
+as $$ 
+declare temprow rules%rowtype;
+declare counter int := 1;
+  begin
+    for temprow in select ruleid, count(sr.sentenceid) filter (where sr.status = 'Corrected')
+                   from rules r left outer join sentencerules sr on r.ruleid = sr.taggedruleid
+                   group by r.ruleid
+                   order by count(sr.sentenceid) desc
+    loop
+	  update rules
+	  set priority = counter
+	  where ruleid = temprow.ruleid;
+	  counter := counter + 1;
+  end loop;
+  end;
+$$ language plpgsql;
+
+create or replace function getRuleGrade(sentid int)
+returns decimal as $$
+  begin 
+    return (select td.rulecorrect
+            from trainingdataset td inner join sentencerules sr on td.sentenceid = sr.sentenceid
+            where td.rulecorrectid = sr.taggedruleid
+            and td.sentenceid = sentid);
+  end;
+$$ language plpgsql;
+
+
+CREATE OR REPLACE PROCEDURE updateReputation(sentID int)
+LANGUAGE sql
+AS $$
+  UPDATE reviewers r
+  SET reputation = reputation + (CASE WHEN 
+      (getRuleGrade(sentID) > .5)
+    THEN
+	  CASE WHEN pr.rulereview = 1 THEN
+        +10
+      ELSE
+        -10
+	  END
+	ELSE
+	  CASE WHEN pr.rulereview = 0 THEN
+        +10
+      ELSE
+        -10
+	  END
+    END)
+  FROM peoplereviews pr
+  INNER JOIN sentencerules sr ON (pr.sentenceid = sr.sentenceid
+                                  AND pr.rulereviewid = sr.taggedruleid)
+  WHERE pr.reviewerid = r.reviewerid
+    AND pr.sentenceid = sentID;
+$$;
